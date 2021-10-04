@@ -16,7 +16,7 @@ WatchySim comes with most of the example Watchy watch faces by default. You can 
 
 1) Add a new header file (for example, Watchy_PowerShell.h). This file defines your class that extends the Watchy class. Unlike the actual Watchy SDK, in this class - include "Watchy.h", rather than <Watchy.h>. This now references our simulated version of the Watchy SDK. You will have to change this include to <Watchy.h> when you move this watch face to Arduino. In this file, most Watchy watch faces include a secondary header (for example "powershell.h") that includes their bitmaps.
 2) Add a new C++ file (for eample, Watchy_PowerShell.cpp) to implement the logic for your watch face. In this implementation, you will have access to many of the methods exposed by Watchy: `display.drawBitmap()`, `display.fillScreen()`, and more.
-3) Update the beginning of WatchySim.cpp to include your new watch face's header file and create an instance of your custom watch face class. Follow the examples there, and comment out the ones that are currently define.
+3) Update the beginning of WatchySim.cpp to include your new watch face's header file and create an instance of your custom watch face class. Follow the examples there, and comment out the ones that are currently defined.
 
 ## Known issues
 
