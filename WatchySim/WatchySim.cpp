@@ -2,6 +2,7 @@
 #include <objidl.h>
 #include <gdiplus.h>
 #include <Shlwapi.h>
+#include <time.h>
 
 #include "Resource.h"
 
@@ -22,17 +23,27 @@
 //WatchyAnalogGabel watchy = WatchyAnalogGabel();
 WatchyPowerShell watchy = WatchyPowerShell();
 
+HRSRC myResource;
+HGLOBAL myResourceData;
+unsigned int myResourceSize;
+
+LPSTREAM pStream;
+Image *image;
+
 VOID OnPaint(HDC hdc)
 {
+    if (image == NULL)
+    {
+        myResource = ::FindResource(NULL, MAKEINTRESOURCE(IDR_BACKGROUND), RT_RCDATA);
+        myResourceData = ::LoadResource(NULL, myResource);
+        myResourceSize = ::SizeofResource(NULL, myResource);
+
+        pStream = SHCreateMemStream((LPBYTE)LockResource(myResourceData), myResourceSize);
+        image = new Image(pStream);
+    }
+
     Graphics graphics(hdc);
-
-    HRSRC myResource = ::FindResource(NULL, MAKEINTRESOURCE(IDR_BACKGROUND), RT_RCDATA);
-    HGLOBAL myResourceData = ::LoadResource(NULL, myResource);
-    unsigned int myResourceSize = ::SizeofResource(NULL, myResource);
-
-    LPSTREAM pStream = SHCreateMemStream((LPBYTE)LockResource(myResourceData), myResourceSize);
-    Image image(pStream);
-    graphics.DrawImage(&image, 0, 0);
+    graphics.DrawImage(image, 0, 0);
 
     watchy.showWatchFace(&graphics, &hdc);
 }
@@ -87,6 +98,10 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, PSTR, INT iCmdShow)
     HICON hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_WATCHYSIM));
     SendMessage(hWnd, WM_SETICON, ICON_SMALL, (LPARAM)hIcon);
     SendMessage(hWnd, WM_SETICON, ICON_BIG, (LPARAM)hIcon);
+   
+    // Set the watch face timer for every second, but only
+    // repaint every minute.
+    SetTimer(hWnd, 1, 1000, NULL);
 
     ShowWindow(hWnd, iCmdShow);
     UpdateWindow(hWnd);
@@ -109,6 +124,21 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
 
     switch (message)
     {
+    case WM_TIMER:
+    {
+        time_t curr_time = time(NULL);
+        struct tm tm_local;
+        localtime_s(&tm_local, &curr_time);
+        if (tm_local.tm_sec != 0)
+        {
+            return 0;
+        }
+        else
+        {
+            InvalidateRect(hWnd, NULL, false);
+            // Intentional fall-through to WM_PAINT
+        }
+    }
     case WM_PAINT:
         hdc = BeginPaint(hWnd, &ps);
         OnPaint(hdc);
