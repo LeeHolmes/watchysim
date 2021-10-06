@@ -66,8 +66,8 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, PSTR, INT iCmdShow)
 
     RECT clientRect;
     clientRect.left = clientRect.top = 0;
-    clientRect.right = 659;
-    clientRect.bottom = 437;
+    clientRect.right = 406;
+    clientRect.bottom = 712;
     
     AdjustWindowRect(&clientRect, WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU, false);
 

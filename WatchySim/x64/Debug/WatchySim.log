@@ -1,0 +1,11 @@
+﻿  Watchy.cpp
+  WatchySim.cpp
+d:\lee\git\watchysim\watchysim\watchysim.cpp(101): warning C4244: 'return': conversion from 'WPARAM' to 'int', possible loss of data
+  Watchy_AnalogGabel.cpp
+  Watchy_DOS.cpp
+  Watchy_MacPaint.cpp
+  Watchy_Pokemon.cpp
+  Watchy_PowerShell.cpp
+  Watchy_Tetris.cpp
+  Generating Code...
+  WatchySim.vcxproj -> D:\Lee\git\watchysim\x64\Debug\WatchySim.exe
