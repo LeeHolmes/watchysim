@@ -79,19 +79,12 @@ void DisplaySim::drawBitmapRaw(uint16_t x, uint16_t y, const uint8_t *bitmap, ui
     }
 }
 
-
 void DisplaySim::fillScreen(uint16_t color)
 {
-    if (color == GxEPD_BLACK)
-    {
-        SolidBrush fillColor(Color(255, 0, 0, 0));
-        graphics->FillRectangle(&fillColor, DISPLAY_OFFSET_X, DISPLAY_OFFSET_Y, DISPLAY_WIDTH, DISPLAY_HEIGHT);
-    }
-    else
-    {
-        SolidBrush fillColor(Color(255, 255, 255, 255));
-        graphics->FillRectangle(&fillColor, DISPLAY_OFFSET_X, DISPLAY_OFFSET_Y, DISPLAY_WIDTH, DISPLAY_HEIGHT);
-    }
+    Color c = color == GxEPD_BLACK ? Color(255,0,0,0) : Color(255,255,255,255);
+    SolidBrush fillColor(c);
+
+    graphics->FillRectangle(&fillColor, DISPLAY_OFFSET_X, DISPLAY_OFFSET_Y, DISPLAY_WIDTH, DISPLAY_HEIGHT);
 }
 
 void DisplaySim::setTextColor(uint16_t color)
@@ -170,81 +163,53 @@ void DisplaySim::drawCircleHelper(int16_t x0, int16_t y0, int16_t r, uint8_t cor
     }
     REAL sweepAngle = 90;
 
-    if (color == GxEPD_BLACK)
-    {
-        Pen fillColor(Color(255, 0, 0, 0));
-        graphics->DrawArc(&fillColor, x0 + DISPLAY_OFFSET_X - r, y0 + DISPLAY_OFFSET_Y - r,
-            r * 2, r * 2, startAngle, sweepAngle);
-    }
-    else
-    {
-        Pen fillColor(Color(255, 255, 255, 255));
-        graphics->DrawArc(&fillColor, x0 + DISPLAY_OFFSET_X - r, y0 + DISPLAY_OFFSET_Y - r,
-            r * 2, r * 2, startAngle, sweepAngle);
-    }
+    Color c = color == GxEPD_BLACK ? Color(255,0,0,0) : Color(255,255,255,255);
+    Pen fillColor(c);
+
+    graphics->DrawArc(&fillColor, x0 + DISPLAY_OFFSET_X - r, y0 + DISPLAY_OFFSET_Y - r,
+        r * 2, r * 2, startAngle, sweepAngle);
+
 }
 
 void DisplaySim::drawPixel(int16_t x, int16_t y, uint16_t color)
 {
     SetPixel(*hdc, x + DISPLAY_OFFSET_X, y + DISPLAY_OFFSET_Y, color | color << 8);
 }
+
 void DisplaySim::fillCircle(uint16_t x, uint16_t y, uint16_t r, uint16_t color)
 {
-    if (color == GxEPD_BLACK)
-    {
-        SolidBrush fillColor(Color(255, 0, 0, 0));
-        graphics->FillEllipse(&fillColor, x + DISPLAY_OFFSET_X - r, y + DISPLAY_OFFSET_Y - r, 2*r, 2*r);
-    }
-    else
-    {
-        SolidBrush fillColor(Color(255, 255, 255, 255));
-        graphics->FillEllipse(&fillColor, x + DISPLAY_OFFSET_X - r, y + DISPLAY_OFFSET_Y - r, 2 * r, 2 * r);
-    }
-}
+    Color c = color == GxEPD_BLACK ? Color(255,0,0,0) : Color(255,255,255,255);
+    SolidBrush fillColor(c);
 
+    graphics->FillEllipse(&fillColor, x + DISPLAY_OFFSET_X - r, y + DISPLAY_OFFSET_Y - r, 2*r, 2*r);
+
+}
 
 void DisplaySim::drawRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color)
 {
-    if (color == GxEPD_BLACK)
-    {
-        Pen fillColor(Color(255, 0, 0, 0));
-        graphics->DrawRectangle(&fillColor, x + DISPLAY_OFFSET_X, y + DISPLAY_OFFSET_Y, w, h);
-    }
-    else
-    {
-        Pen fillColor(Color(255, 255, 255, 255));
-        graphics->DrawRectangle(&fillColor, x + DISPLAY_OFFSET_X, y + DISPLAY_OFFSET_Y, w, h);
-    }
+    Color c = color == GxEPD_BLACK ? Color(255,0,0,0) : Color(255,255,255,255);
+    Pen fillColor(c);
+
+    graphics->DrawRectangle(&fillColor, x + DISPLAY_OFFSET_X, y + DISPLAY_OFFSET_Y, w, h);
+
 }
 
 void DisplaySim::fillRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color)
 {
-    if (color == GxEPD_BLACK)
-    {
-        SolidBrush fillColor(Color(255, 0, 0, 0));
-        graphics->FillRectangle(&fillColor, x + DISPLAY_OFFSET_X, y + DISPLAY_OFFSET_Y, w, h);
-    }
-    else
-    {
-        SolidBrush fillColor(Color(255, 255, 255, 255));
-        graphics->FillRectangle(&fillColor, x + DISPLAY_OFFSET_X, y + DISPLAY_OFFSET_Y, w, h);
-    }
+    Color c = color == GxEPD_BLACK ? Color(255,0,0,0) : Color(255,255,255,255);
+    SolidBrush fillColor(c);
+
+    graphics->FillRectangle(&fillColor, x + DISPLAY_OFFSET_X, y + DISPLAY_OFFSET_Y, w, h);
+
 }
 
 void DisplaySim::drawLine(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint16_t color)
 {
-    if (color == GxEPD_BLACK)
-    {
-        Pen fillColor(Color(255, 0, 0, 0));
-        graphics->DrawLine(&fillColor, x0 + DISPLAY_OFFSET_X, y0 + DISPLAY_OFFSET_Y,
-            x1 + DISPLAY_OFFSET_X, y1 + DISPLAY_OFFSET_Y);
-    }
-    else
-    {
-        Pen fillColor(Color(255, 255, 255, 255));
-        graphics->DrawLine(&fillColor, x0 + DISPLAY_OFFSET_X, y0 + DISPLAY_OFFSET_Y,
-            x1 + DISPLAY_OFFSET_X, y1 + DISPLAY_OFFSET_Y);
-    }
+    Color c = color == GxEPD_BLACK ? Color(255,0,0,0) : Color(255,255,255,255);
+    Pen fillColor(c);
+
+    graphics->DrawLine(&fillColor, x0 + DISPLAY_OFFSET_X, y0 + DISPLAY_OFFSET_Y,
+        x1 + DISPLAY_OFFSET_X, y1 + DISPLAY_OFFSET_Y);
 }
 
 void DisplaySim::drawFastVLine(int16_t x, int16_t y, int16_t h, uint16_t color)
