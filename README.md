@@ -1,7 +1,6 @@
 # watchysim
 
-![image](https://user-images.githubusercontent.com/11475352/136417949-7311f508-e30f-44e6-bc8c-1b6356391316.png)
-
+![image](https://user-images.githubusercontent.com/11475352/136419555-33343b44-f79d-4961-afb2-0b38a5cf5378.png)
 
 [Watchy](https://watchy.sqfmi.com/) is an exciting Open Source E-Paper Watch, based on Arduino and the ESP32 micro controller. WatchySim is a simulation framework for its watch faces.
 
