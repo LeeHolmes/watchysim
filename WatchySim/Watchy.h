@@ -19,8 +19,8 @@ using namespace std;
 #define DISPLAY_WIDTH 200
 #define DISPLAY_HEIGHT 200
 
-#define DISPLAY_OFFSET_X 106
-#define DISPLAY_OFFSET_Y 226
+#define DISPLAY_OFFSET_X 242
+#define DISPLAY_OFFSET_Y 198
 
 
 typedef struct {

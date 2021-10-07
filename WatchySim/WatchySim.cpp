@@ -77,8 +77,8 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, PSTR, INT iCmdShow)
 
     RECT clientRect;
     clientRect.left = clientRect.top = 0;
-    clientRect.right = 406;
-    clientRect.bottom = 712;
+    clientRect.right = 676;
+    clientRect.bottom = 676;
     
     AdjustWindowRect(&clientRect, WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU, false);
 
@@ -113,7 +113,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, PSTR, INT iCmdShow)
     }
 
     GdiplusShutdown(gdiplusToken);
-    return msg.wParam;
+    return (int) msg.wParam;
 }  // WinMain
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
