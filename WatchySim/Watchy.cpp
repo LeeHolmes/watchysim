@@ -14,6 +14,7 @@ void Watchy::showWatchFace(Graphics *graphics, HDC *hdc)
 
     struct tm tm_local;
     localtime_s(&tm_local, &curr_time);
+    currentTime.Wday = tm_local.tm_wday;
     currentTime.Day = tm_local.tm_mday;
     currentTime.Month = tm_local.tm_mon;
     currentTime.Year = tm_local.tm_year + 1900 - 1970;
