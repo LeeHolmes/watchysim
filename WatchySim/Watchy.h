@@ -1,3 +1,6 @@
+#ifndef WATCHY_H
+#define WATCHY_H
+
 #include <stdint.h>
 #include <windows.h>
 #include <objidl.h>
@@ -85,7 +88,11 @@ public:
     void init();
     virtual void drawWatchFace();
     float getBatteryVoltage();
+    void setBatteryVoltage(float newVoltage);
 
 private:
     Graphics *graphics;
+    float currentVoltage = 3.96f;
 };
+
+#endif

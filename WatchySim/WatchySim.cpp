@@ -9,20 +9,21 @@
 #pragma comment (lib,"Gdiplus.lib")
 #pragma comment (lib, "Shlwapi.lib")
 
+#include "Watchy.h"
+
 //#include "Watchy_DOS.h"
 //#include "Watchy_Tetris.h"
 //#include "Watchy_MacPaint.h"
 //#include "Watchy_Pokemon.h"
-//#include "Watchy_AnalogGabel.h"
-#include "Watchy.h"
-#include "Watchy_PowerShell.h"
+#include "Watchy_AnalogGabel.h"
+//#include "Watchy_PowerShell.h"
 
 //WatchyDOS watchy = WatchyDOS();
 //WatchyTetris watchy = WatchyTetris();
 //WatchyMacPaint watchy = WatchyMacPaint();
 //WatchyPokemon watchy = WatchyPokemon();
-//WatchyAnalogGabel watchy = WatchyAnalogGabel();
-WatchyPowerShell watchy = WatchyPowerShell();
+WatchyAnalogGabel watchy = WatchyAnalogGabel();
+//WatchyPowerShell watchy = WatchyPowerShell();
 
 HRSRC myResource;
 HGLOBAL myResourceData;
@@ -156,7 +157,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
 
             InvalidateRect(hWnd, NULL, false);
             PostMessage(hWnd, WM_PAINT, 0, 0);
-            return 0;;
+            return 0;
 
 
         case ID_TIME_SHORT:
@@ -177,7 +178,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
 
             InvalidateRect(hWnd, NULL, false);
             PostMessage(hWnd, WM_PAINT, 0, 0);
-            return 0;;
+            return 0;
 
         case ID_TIME_LONG:
             curr_time = time(NULL);
@@ -194,7 +195,42 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
 
             InvalidateRect(hWnd, NULL, false);
             PostMessage(hWnd, WM_PAINT, 0, 0);
-            return 0;;
+            return 0;
+
+        case ID_BATTERY_ZERO:
+            watchy.setBatteryVoltage(0.0f);
+            InvalidateRect(hWnd, NULL, false);
+            PostMessage(hWnd, WM_PAINT, 0, 0);
+
+            return 0;
+
+        case ID_BATTERY_LOW:
+            watchy.setBatteryVoltage(3.7f);
+            InvalidateRect(hWnd, NULL, false);
+            PostMessage(hWnd, WM_PAINT, 0, 0);
+
+            return 0;
+
+        case ID_BATTERY_MEDIUM:
+            watchy.setBatteryVoltage(3.81f);
+            InvalidateRect(hWnd, NULL, false);
+            PostMessage(hWnd, WM_PAINT, 0, 0);
+
+            return 0;
+
+        case ID_BATTERY_HIGH:
+            watchy.setBatteryVoltage(3.96f);
+            InvalidateRect(hWnd, NULL, false);
+            PostMessage(hWnd, WM_PAINT, 0, 0);
+
+            return 0;
+
+        case ID_BATTERY_MAX:
+            watchy.setBatteryVoltage(4.2f);
+            InvalidateRect(hWnd, NULL, false);
+            PostMessage(hWnd, WM_PAINT, 0, 0);
+
+            return 0;
 
         case ID_TOOLS_SCREENSHOT:
 

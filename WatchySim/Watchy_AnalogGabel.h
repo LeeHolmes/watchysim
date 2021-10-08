@@ -1,5 +1,5 @@
-#ifndef WATCHY_MACPAINT_H
-#define WATCHY_MACPAINT_H
+#ifndef WATCHY_ANALOGGABEL_H
+#define WATCHY_ANALOGGABELT_H
 
 #include "Watchy.h"
 #include "analoggabel.h"

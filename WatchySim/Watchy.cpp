@@ -17,7 +17,12 @@ void Watchy::showWatchFace(Graphics *graphics, HDC *hdc)
 
 float Watchy::getBatteryVoltage()
 {
-    return 3.96f;
+    return currentVoltage;
+}
+
+void Watchy::setBatteryVoltage(float voltage)
+{
+    currentVoltage = voltage;
 }
 
 void Watchy::setTime(tm newTime)

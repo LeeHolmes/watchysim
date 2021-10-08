@@ -96,13 +96,13 @@ public:
     {
         switch (day)
         {
-        case 0: return "Sun"; break;
-        case 1: return "Mon"; break;
-        case 2: return "Tue"; break;
-        case 3: return "Wed"; break;
-        case 4: return "Thu"; break;
-        case 5: return "Fri"; break;
-        case 6: return "Sat"; break;
+        case 1: return "Sun"; break;
+        case 2: return "Mon"; break;
+        case 3: return "Tue"; break;
+        case 4: return "Wed"; break;
+        case 5: return "Thu"; break;
+        case 6: return "Fri"; break;
+        case 7: return "Sat"; break;
         }
 
         return "";
