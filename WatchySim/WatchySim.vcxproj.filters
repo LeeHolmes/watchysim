@@ -96,6 +96,24 @@
     <ClInclude Include="FreeMono9pt7b.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DSEG7_Classic_Bold_25.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DSEG7_Classic_Regular_15.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DSEG7_Classic_Regular_39.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Watchy_7_SEG.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Watchy_7_SEG_icons.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DSEG7_Classic_Bold_53.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WatchySim.cpp">
@@ -121,6 +139,9 @@
     </ClCompile>
     <ClCompile Include="Watchy_PowerShell.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Watchy_7_SEG.cpp">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

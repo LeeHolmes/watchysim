@@ -25,6 +25,9 @@ using namespace std;
 #define DISPLAY_OFFSET_X 241
 #define DISPLAY_OFFSET_Y 198
 
+#define YEAR_OFFSET 1970
+
+#define WEATHER_UPDATE_INTERVAL 30 //minutes
 
 typedef struct {
     uint8_t Second;
@@ -46,12 +49,27 @@ public:
     void setTextColor(uint16_t color);
     void setFont(const GFXfont *f = NULL);
     void setCursor(int16_t x, int16_t y);
+    
+    void println(String text);
     void println(const char* text);
+    void println(uint8_t number);
+    void println(uint32_t number);
+    void println(int32_t number);
+    void println(char text);
 
     void print(String text);
     void print(const char* text);
-    void print(int number);
+    void print(uint8_t number);
+    void print(uint32_t number);
     void print(char text);
+
+    void getTextBounds(String str, int16_t x, int16_t y,
+        int16_t *x1, int16_t *y1, uint16_t *w,
+        uint16_t *h);
+
+    void getTextBounds(const char *str, int16_t x, int16_t y,
+        int16_t *x1, int16_t *y1, uint16_t *w,
+        uint16_t *h);
 
     void drawPixel(int16_t x, int16_t y, uint16_t color);
     void fillCircle(uint16_t x, uint16_t y, uint16_t r, uint16_t color);
@@ -66,6 +84,11 @@ private:
     void drawBitmapRaw(uint16_t x, uint16_t y, const uint8_t *bitmap, uint16_t w, uint16_t h, uint16_t color, bool rasterMode);
     void drawFontBitmap(uint16_t x, uint16_t y, const uint8_t *bitmap, uint16_t w, uint16_t h, uint16_t color);
 
+    void charBounds(unsigned char c, int16_t *x, int16_t *y,
+        int16_t *minx, int16_t *miny, int16_t *maxx,
+        int16_t *maxy);
+
+
     Graphics *graphics;
     HDC *hdc;
 
@@ -73,11 +96,32 @@ private:
     uint16_t currentY;
     uint16_t currentFontColor;
     const GFXfont *currentFont;
+
+    uint16_t _width = DISPLAY_WIDTH;
+    uint16_t _height = DISPLAY_HEIGHT;
+    bool wrap = true;
+};
+
+typedef struct weatherData {
+    int8_t temperature;
+    int16_t weatherConditionCode;
+} weatherData;
+
+class SensorSim {
+public:
+    uint32_t getCounter();
+    void resetStepCounter();
+
+    void setSteps(uint32_t stepCount);
+
+private:
+    uint32_t stepCount = 5280;
 };
 
 class Watchy {
 public:
     DisplaySim display;
+    SensorSim sensor;
     tmElements_t currentTime;
 public:
     Watchy();
@@ -88,11 +132,30 @@ public:
     void init();
     virtual void drawWatchFace();
     float getBatteryVoltage();
-    void setBatteryVoltage(float newVoltage);
+    weatherData getWeatherData();
 
+    void setBatteryVoltage(float newVoltage);
+    void setBluetooth(bool enabled);
+    void setWifi(bool enabled);
+    void setSteps(uint32_t stepCount);
+    void setWeatherCode(int16_t weatherConditionCode);
+    
+    void setTemperatureUnit(char* temperatureUnit);
+    void setTemperature(int8_t temperature);
+
+protected:
+    const char* dayShortStr(uint8_t day);
+    const char* dayStr(uint8_t day);
+    
+    const char* monthShortStr(uint8_t month);
+
+    bool BLE_CONFIGURED = true;
+    bool WIFI_CONFIGURED = true;
+    char TEMP_UNIT[10] = "imperial";
+    
 private:
     Graphics *graphics;
     float currentVoltage = 3.96f;
+    weatherData currentWeather = { 65, 550 };
 };
-
 #endif

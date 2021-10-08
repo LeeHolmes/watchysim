@@ -91,22 +91,6 @@ public:
         double hy1 = 100 + (cos(radHour) * 45);
         display.drawLine(100, 100, (int)hx1, (int)hy1, GxEPD_WHITE);
     }
-
-    const char* dayShortStr(uint8_t day)
-    {
-        switch (day)
-        {
-        case 1: return "Sun"; break;
-        case 2: return "Mon"; break;
-        case 3: return "Tue"; break;
-        case 4: return "Wed"; break;
-        case 5: return "Thu"; break;
-        case 6: return "Fri"; break;
-        case 7: return "Sat"; break;
-        }
-
-        return "";
-    }
 };
 
 WatchyAnalogGabel m; //instantiate your watchface

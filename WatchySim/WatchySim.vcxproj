@@ -151,6 +151,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="DSEG7_Classic_Bold_25.h" />
+    <ClInclude Include="DSEG7_Classic_Bold_53.h" />
+    <ClInclude Include="DSEG7_Classic_Regular_15.h" />
+    <ClInclude Include="DSEG7_Classic_Regular_39.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="FreeMono9pt7b.h" />
     <ClInclude Include="FreeMonoBold9pt7b.h" />
@@ -172,6 +176,8 @@
     <ClInclude Include="Watchy.h" />
     <ClInclude Include="WatchySim.h" />
     <ClInclude Include="analoggabel.h" />
+    <ClInclude Include="Watchy_7_SEG.h" />
+    <ClInclude Include="Watchy_7_SEG_icons.h" />
     <ClInclude Include="Watchy_AnalogGabel.h" />
     <ClInclude Include="Watchy_DOS.h" />
     <ClInclude Include="Watchy_MacPaint.h" />
@@ -182,6 +188,7 @@
   <ItemGroup>
     <ClCompile Include="Watchy.cpp" />
     <ClCompile Include="WatchySim.cpp" />
+    <ClCompile Include="Watchy_7_SEG.cpp" />
     <ClCompile Include="Watchy_AnalogGabel.cpp" />
     <ClCompile Include="Watchy_DOS.cpp" />
     <ClCompile Include="Watchy_MacPaint.cpp" />

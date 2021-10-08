@@ -17,6 +17,7 @@
 //#include "Watchy_Pokemon.h"
 //#include "Watchy_AnalogGabel.h"
 #include "Watchy_PowerShell.h"
+//#include "Watchy_7_SEG.h"
 
 //WatchyDOS watchy = WatchyDOS();
 //WatchyTetris watchy = WatchyTetris();
@@ -24,6 +25,7 @@
 //WatchyPokemon watchy = WatchyPokemon();
 //WatchyAnalogGabel watchy = WatchyAnalogGabel();
 WatchyPowerShell watchy = WatchyPowerShell();
+//Watchy7SEG watchy = Watchy7SEG();
 
 HRSRC myResource;
 HGLOBAL myResourceData;
@@ -133,6 +135,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
         time_t curr_time = time(NULL);
         struct tm tm_local;
         localtime_s(&tm_local, &curr_time);
+        watchy.setTime(tm_local);
+
         if (tm_local.tm_sec != 0)
         {
             return 0;
@@ -197,7 +201,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
             PostMessage(hWnd, WM_PAINT, 0, 0);
             return 0;
 
-        case ID_BATTERY_ZERO:
+        case ID_BATTERY_DEAD:
             watchy.setBatteryVoltage(0.0f);
             InvalidateRect(hWnd, NULL, false);
             PostMessage(hWnd, WM_PAINT, 0, 0);
@@ -227,6 +231,167 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
 
         case ID_BATTERY_MAX:
             watchy.setBatteryVoltage(4.2f);
+            InvalidateRect(hWnd, NULL, false);
+            PostMessage(hWnd, WM_PAINT, 0, 0);
+
+            return 0;
+
+        case ID_BLUETOOTH_ON:
+            watchy.setBluetooth(true);
+            InvalidateRect(hWnd, NULL, false);
+            PostMessage(hWnd, WM_PAINT, 0, 0);
+
+            return 0;
+
+        case ID_BLUETOOTH_OFF:
+            watchy.setBluetooth(false);
+            InvalidateRect(hWnd, NULL, false);
+            PostMessage(hWnd, WM_PAINT, 0, 0);
+
+            return 0;
+
+        case ID_WIFI_ON:
+            watchy.setWifi(true);
+            InvalidateRect(hWnd, NULL, false);
+            PostMessage(hWnd, WM_PAINT, 0, 0);
+
+            return 0;
+
+        case ID_WIFI_OFF:
+            watchy.setWifi(false);
+            InvalidateRect(hWnd, NULL, false);
+            PostMessage(hWnd, WM_PAINT, 0, 0);
+
+            return 0;
+
+        case ID_STEPS_NONE:
+            watchy.setSteps(0);
+            InvalidateRect(hWnd, NULL, false);
+            PostMessage(hWnd, WM_PAINT, 0, 0);
+
+            return 0;
+
+        case ID_STEPS_LAZY:
+            watchy.setSteps(12);
+            InvalidateRect(hWnd, NULL, false);
+            PostMessage(hWnd, WM_PAINT, 0, 0);
+
+            return 0;
+
+        case ID_STEPS_REGULAR:
+            watchy.setSteps(5280);
+            InvalidateRect(hWnd, NULL, false);
+            PostMessage(hWnd, WM_PAINT, 0, 0);
+
+            return 0;
+
+        case ID_STEPS_ATHLETE:
+            watchy.setSteps(52769);
+            InvalidateRect(hWnd, NULL, false);
+            PostMessage(hWnd, WM_PAINT, 0, 0);
+
+            return 0;
+
+        case ID_WEATHER_CLOUDY:
+            watchy.setWeatherCode(802);
+            InvalidateRect(hWnd, NULL, false);
+            PostMessage(hWnd, WM_PAINT, 0, 0);
+
+            return 0;
+
+        case ID_WEATHER_FEWCLOUDS:
+            watchy.setWeatherCode(801);
+            InvalidateRect(hWnd, NULL, false);
+            PostMessage(hWnd, WM_PAINT, 0, 0);
+
+            return 0;
+
+        case ID_WEATHER_CLEAR:
+            watchy.setWeatherCode(800);
+            InvalidateRect(hWnd, NULL, false);
+            PostMessage(hWnd, WM_PAINT, 0, 0);
+
+            return 0;
+
+        case ID_WEATHER_ATMOSPHERE:
+            watchy.setWeatherCode(750);
+            InvalidateRect(hWnd, NULL, false);
+            PostMessage(hWnd, WM_PAINT, 0, 0);
+
+            return 0;
+
+        case ID_WEATHER_SNOW:
+            watchy.setWeatherCode(650);
+            InvalidateRect(hWnd, NULL, false);
+            PostMessage(hWnd, WM_PAINT, 0, 0);
+
+            return 0;
+
+        case ID_WEATHER_RAIN:
+            watchy.setWeatherCode(550);
+            InvalidateRect(hWnd, NULL, false);
+            PostMessage(hWnd, WM_PAINT, 0, 0);
+
+            return 0;
+
+        case ID_WEATHER_DRIZZLE:
+            watchy.setWeatherCode(350);
+            InvalidateRect(hWnd, NULL, false);
+            PostMessage(hWnd, WM_PAINT, 0, 0);
+
+            return 0;
+
+        case ID_WEATHER_THUNDERSTORM:
+            watchy.setWeatherCode(250);
+            InvalidateRect(hWnd, NULL, false);
+            PostMessage(hWnd, WM_PAINT, 0, 0);
+
+            return 0;
+
+        case ID_WEATHER_OTHER:
+            watchy.setWeatherCode(150);
+            InvalidateRect(hWnd, NULL, false);
+            PostMessage(hWnd, WM_PAINT, 0, 0);
+
+            return 0;
+
+        case ID_TEMPERATURE_CELSIUS:
+            watchy.setTemperatureUnit((char *)"metric");
+            InvalidateRect(hWnd, NULL, false);
+            PostMessage(hWnd, WM_PAINT, 0, 0);
+
+            return 0;
+
+        case ID_TEMPERATURE_FAHRENHEIT:
+            watchy.setTemperatureUnit((char *)"imperial");
+            InvalidateRect(hWnd, NULL, false);
+            PostMessage(hWnd, WM_PAINT, 0, 0);
+
+            return 0;
+
+        case ID_TEMPERATURE_CANADA:
+            watchy.setTemperature(-45);
+            InvalidateRect(hWnd, NULL, false);
+            PostMessage(hWnd, WM_PAINT, 0, 0);
+
+            return 0;
+
+        case ID_TEMPERATURE_CHILLY:
+            watchy.setTemperature(7);
+            InvalidateRect(hWnd, NULL, false);
+            PostMessage(hWnd, WM_PAINT, 0, 0);
+
+            return 0;
+
+        case ID_TEMPERATURE_WARM:
+            watchy.setTemperature(15);
+            InvalidateRect(hWnd, NULL, false);
+            PostMessage(hWnd, WM_PAINT, 0, 0);
+
+            return 0;
+
+        case ID_TEMPERATURE_INFERNO:
+            watchy.setTemperature(40);
             InvalidateRect(hWnd, NULL, false);
             PostMessage(hWnd, WM_PAINT, 0, 0);
 
