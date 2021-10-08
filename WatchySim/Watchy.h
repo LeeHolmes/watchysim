@@ -79,6 +79,8 @@ public:
 public:
     Watchy();
     void showWatchFace(Graphics *graphics, HDC *hdc);
+    void setTime(tm newTime);
+
     void init();
     virtual void drawWatchFace();
     float getBatteryVoltage();

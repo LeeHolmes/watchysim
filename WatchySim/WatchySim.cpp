@@ -71,7 +71,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, PSTR, INT iCmdShow)
 
     wndClass.hCursor = LoadCursor(NULL, IDC_ARROW);
     wndClass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
-    wndClass.lpszMenuName = NULL;
+    wndClass.lpszMenuName = MAKEINTRESOURCE(IDC_WATCHYSIM);
     wndClass.lpszClassName = TEXT("WatchySim");
 
     RegisterClass(&wndClass);
@@ -145,6 +145,48 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
         OnPaint(hdc);
         EndPaint(hWnd, &ps);
         return 0;
+    case WM_COMMAND:
+        switch (LOWORD(wParam))
+        {
+        case ID_TIME_SHORT:
+            time_t curr_time;
+            curr_time = time(NULL);
+
+            struct tm tm_local;
+            localtime_s(&tm_local, &curr_time);
+            tm_local.tm_hour = 01;
+            tm_local.tm_mday = 01;
+            tm_local.tm_min = 01;
+            tm_local.tm_mon = 04;
+            tm_local.tm_sec = 01;
+            tm_local.tm_wday = 0;
+            tm_local.tm_year = 111;
+
+            watchy.setTime(tm_local);
+
+            InvalidateRect(hWnd, NULL, false);
+            PostMessage(hWnd, WM_PAINT, 0, 0);
+            return 0;
+
+        case ID_TIME_LONG:
+            curr_time = time(NULL);
+            localtime_s(&tm_local, &curr_time);
+            tm_local.tm_hour = 18;
+            tm_local.tm_mday = 01;
+            tm_local.tm_min = 33;
+            tm_local.tm_mon = 8;
+            tm_local.tm_sec = 01;
+            tm_local.tm_wday = 3;
+            tm_local.tm_year = 199;
+
+            watchy.setTime(tm_local);
+
+            InvalidateRect(hWnd, NULL, false);
+            PostMessage(hWnd, WM_PAINT, 0, 0);
+            return 0;
+
+            break;
+        }
     case WM_DESTROY:
         PostQuitMessage(0);
         return 0;

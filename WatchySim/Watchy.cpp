@@ -2,13 +2,6 @@
 #include "Watchy.h"
 
 Watchy::Watchy() {
-} //constructor
-
-void Watchy::drawWatchFace() {}
-
-void Watchy::init() {}
-void Watchy::showWatchFace(Graphics *graphics, HDC *hdc)
-{
     time_t curr_time;
     curr_time = time(NULL);
 
@@ -21,7 +14,14 @@ void Watchy::showWatchFace(Graphics *graphics, HDC *hdc)
     currentTime.Hour = tm_local.tm_hour;
     currentTime.Minute = tm_local.tm_min;
     currentTime.Second = tm_local.tm_sec;
+}
 
+void Watchy::drawWatchFace() {}
+
+void Watchy::init() {}
+
+void Watchy::showWatchFace(Graphics *graphics, HDC *hdc)
+{
     display.setContext(graphics, hdc);
     drawWatchFace();
 }
@@ -29,6 +29,17 @@ void Watchy::showWatchFace(Graphics *graphics, HDC *hdc)
 float Watchy::getBatteryVoltage()
 {
     return 3.96f;
+}
+
+void Watchy::setTime(tm newTime)
+{
+    currentTime.Wday = newTime.tm_wday + 1;
+    currentTime.Day = newTime.tm_mday;
+    currentTime.Month = newTime.tm_mon + 1;
+    currentTime.Year = newTime.tm_year + 1900 - 1970;
+    currentTime.Hour = newTime.tm_hour;
+    currentTime.Minute = newTime.tm_min;
+    currentTime.Second = newTime.tm_sec;
 }
 
 void DisplaySim::setContext(Graphics *graphics, HDC *hdc)
