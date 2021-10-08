@@ -19,7 +19,7 @@ using namespace std;
 #define DISPLAY_WIDTH 200
 #define DISPLAY_HEIGHT 200
 
-#define DISPLAY_OFFSET_X 242
+#define DISPLAY_OFFSET_X 241
 #define DISPLAY_OFFSET_Y 198
 
 
@@ -66,7 +66,6 @@ private:
     Graphics *graphics;
     HDC *hdc;
 
-    uint16_t leftMargin;
     uint16_t currentX;
     uint16_t currentY;
     uint16_t currentFontColor;

@@ -14,9 +14,9 @@ void Watchy::showWatchFace(Graphics *graphics, HDC *hdc)
 
     struct tm tm_local;
     localtime_s(&tm_local, &curr_time);
-    currentTime.Wday = tm_local.tm_wday;
+    currentTime.Wday = tm_local.tm_wday + 1;
     currentTime.Day = tm_local.tm_mday;
-    currentTime.Month = tm_local.tm_mon;
+    currentTime.Month = tm_local.tm_mon + 1;
     currentTime.Year = tm_local.tm_year + 1900 - 1970;
     currentTime.Hour = tm_local.tm_hour;
     currentTime.Minute = tm_local.tm_min;
@@ -99,7 +99,6 @@ void DisplaySim::setFont(const GFXfont *f)
 
 void DisplaySim::setCursor(int16_t x, int16_t y)
 {
-    leftMargin = x;
     currentX = x;
     currentY = y;
 }
@@ -109,7 +108,7 @@ void DisplaySim::println(const char* text)
     print(text);
 
     currentY += currentFont->yAdvance;
-    currentX = leftMargin;
+    currentX = 0;
 }
 
 void DisplaySim::print(String text)

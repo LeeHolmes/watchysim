@@ -14,6 +14,7 @@
 //#include "Watchy_MacPaint.h"
 //#include "Watchy_Pokemon.h"
 //#include "Watchy_AnalogGabel.h"
+#include "Watchy.h"
 #include "Watchy_PowerShell.h"
 
 //WatchyDOS watchy = WatchyDOS();
