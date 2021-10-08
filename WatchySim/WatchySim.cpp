@@ -31,7 +31,7 @@ unsigned int myResourceSize;
 LPSTREAM pStream;
 Image *image;
 
-BOOL WINAPI SaveBitmap(HWND hWnd, WCHAR *wPath);
+BOOL WINAPI SaveBitmap(HWND hWnd);
 
 VOID OnPaint(HDC hdc)
 {
@@ -198,8 +198,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
 
         case ID_TOOLS_SCREENSHOT:
 
-            WCHAR path[] = L"c:\\temp\\screenshot.bmp";
-            SaveBitmap(hWnd, path);
+            SaveBitmap(hWnd);
 
             return 0;;
         }
@@ -211,7 +210,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
     }
 } // WndProc
 
-BOOL WINAPI SaveBitmap(HWND hWnd, WCHAR *wPath)
+BOOL WINAPI SaveBitmap(HWND hWnd)
 {
     OPENFILENAME ofn;
     ZeroMemory(&ofn, sizeof(ofn));
