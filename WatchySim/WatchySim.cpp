@@ -31,6 +31,8 @@ unsigned int myResourceSize;
 LPSTREAM pStream;
 Image *image;
 
+BOOL WINAPI SaveBitmap(HWND hWnd, WCHAR *wPath);
+
 VOID OnPaint(HDC hdc)
 {
     if (image == NULL)
@@ -145,9 +147,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
         OnPaint(hdc);
         EndPaint(hWnd, &ps);
         return 0;
+
     case WM_COMMAND:
         switch (LOWORD(wParam))
         {
+        case ID_TIME_CURRENT:
+            watchy.resetTime();
+
+            InvalidateRect(hWnd, NULL, false);
+            PostMessage(hWnd, WM_PAINT, 0, 0);
+            return 0;;
+
+
         case ID_TIME_SHORT:
             time_t curr_time;
             curr_time = time(NULL);
@@ -160,32 +171,37 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
             tm_local.tm_mon = 04;
             tm_local.tm_sec = 01;
             tm_local.tm_wday = 0;
-            tm_local.tm_year = 111;
+            tm_local.tm_year = 2011 - 1900;
 
             watchy.setTime(tm_local);
 
             InvalidateRect(hWnd, NULL, false);
             PostMessage(hWnd, WM_PAINT, 0, 0);
-            return 0;
+            return 0;;
 
         case ID_TIME_LONG:
             curr_time = time(NULL);
             localtime_s(&tm_local, &curr_time);
             tm_local.tm_hour = 18;
-            tm_local.tm_mday = 01;
+            tm_local.tm_mday = 31;
             tm_local.tm_min = 33;
             tm_local.tm_mon = 8;
             tm_local.tm_sec = 01;
             tm_local.tm_wday = 3;
-            tm_local.tm_year = 199;
+            tm_local.tm_year = 2099 - 1900;
 
             watchy.setTime(tm_local);
 
             InvalidateRect(hWnd, NULL, false);
             PostMessage(hWnd, WM_PAINT, 0, 0);
-            return 0;
+            return 0;;
 
-            break;
+        case ID_TOOLS_SCREENSHOT:
+
+            WCHAR path[] = L"c:\\temp\\screenshot.bmp";
+            SaveBitmap(hWnd, path);
+
+            return 0;;
         }
     case WM_DESTROY:
         PostQuitMessage(0);
@@ -194,3 +210,56 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
         return DefWindowProc(hWnd, message, wParam, lParam);
     }
 } // WndProc
+
+BOOL WINAPI SaveBitmap(HWND hWnd, WCHAR *wPath)
+{
+    OPENFILENAME ofn;
+    ZeroMemory(&ofn, sizeof(ofn));
+
+    wchar_t filename[MAX_PATH] = { 0 };
+
+    ofn.lStructSize = sizeof(ofn);
+    ofn.Flags = OFN_EXPLORER | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
+    ofn.hwndOwner = hWnd;
+    ofn.nMaxFile = MAX_PATH;
+    ofn.lpstrFile = filename;
+    ofn.nFilterIndex = 1;
+    ofn.lpstrFilter = L"GIF Files (*.gif)\0*.gif\0\0";
+    ofn.lpstrDefExt = L"gif";
+    GetSaveFileName(&ofn);
+
+    if (wcsnlen_s(filename, MAX_PATH) > 0)
+    {
+        RECT clientRect;
+        GetClientRect(hWnd, &clientRect);
+
+        int x1, y1, x2, y2;
+
+        // get screen dimensions
+        x1 = clientRect.left + DISPLAY_OFFSET_X;
+        y1 = clientRect.top + DISPLAY_OFFSET_Y;
+        x2 = clientRect.left + DISPLAY_WIDTH;
+        y2 = clientRect.bottom + DISPLAY_HEIGHT;
+
+        // copy screen to bitmap
+        HDC     hScreen = GetDC(hWnd);
+        HDC     hDC = CreateCompatibleDC(hScreen);
+        HBITMAP hBitmap = CreateCompatibleBitmap(hScreen, DISPLAY_WIDTH, DISPLAY_HEIGHT);
+        HGDIOBJ old_obj = SelectObject(hDC, hBitmap);
+        BOOL    bRet = BitBlt(hDC, 0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT, hScreen, x1, y1, SRCCOPY);
+
+        CLSID gifClsid;
+        CLSIDFromString(L"{557cf402-1a04-11d3-9a73-0000f81ef32e}", &gifClsid);
+
+        Bitmap newBitmap(hBitmap, NULL);
+        newBitmap.Save(filename, &gifClsid, NULL);
+
+        // clean up
+        SelectObject(hDC, old_obj);
+        DeleteDC(hDC);
+        ReleaseDC(NULL, hScreen);
+        DeleteObject(hBitmap);
+    }
+
+    return TRUE;
+}

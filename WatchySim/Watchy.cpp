@@ -2,18 +2,7 @@
 #include "Watchy.h"
 
 Watchy::Watchy() {
-    time_t curr_time;
-    curr_time = time(NULL);
-
-    struct tm tm_local;
-    localtime_s(&tm_local, &curr_time);
-    currentTime.Wday = tm_local.tm_wday + 1;
-    currentTime.Day = tm_local.tm_mday;
-    currentTime.Month = tm_local.tm_mon + 1;
-    currentTime.Year = tm_local.tm_year + 1900 - 1970;
-    currentTime.Hour = tm_local.tm_hour;
-    currentTime.Minute = tm_local.tm_min;
-    currentTime.Second = tm_local.tm_sec;
+    resetTime();
 }
 
 void Watchy::drawWatchFace() {}
@@ -40,6 +29,22 @@ void Watchy::setTime(tm newTime)
     currentTime.Hour = newTime.tm_hour;
     currentTime.Minute = newTime.tm_min;
     currentTime.Second = newTime.tm_sec;
+}
+
+void Watchy::resetTime()
+{
+    time_t curr_time;
+    curr_time = time(NULL);
+
+    struct tm tm_local;
+    localtime_s(&tm_local, &curr_time);
+    currentTime.Wday = tm_local.tm_wday + 1;
+    currentTime.Day = tm_local.tm_mday;
+    currentTime.Month = tm_local.tm_mon + 1;
+    currentTime.Year = tm_local.tm_year + 1900 - 1970;
+    currentTime.Hour = tm_local.tm_hour;
+    currentTime.Minute = tm_local.tm_min;
+    currentTime.Second = tm_local.tm_sec;
 }
 
 void DisplaySim::setContext(Graphics *graphics, HDC *hdc)
