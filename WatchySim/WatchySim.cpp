@@ -15,15 +15,15 @@
 //#include "Watchy_Tetris.h"
 //#include "Watchy_MacPaint.h"
 //#include "Watchy_Pokemon.h"
-#include "Watchy_AnalogGabel.h"
-//#include "Watchy_PowerShell.h"
+//#include "Watchy_AnalogGabel.h"
+#include "Watchy_PowerShell.h"
 
 //WatchyDOS watchy = WatchyDOS();
 //WatchyTetris watchy = WatchyTetris();
 //WatchyMacPaint watchy = WatchyMacPaint();
 //WatchyPokemon watchy = WatchyPokemon();
-WatchyAnalogGabel watchy = WatchyAnalogGabel();
-//WatchyPowerShell watchy = WatchyPowerShell();
+//WatchyAnalogGabel watchy = WatchyAnalogGabel();
+WatchyPowerShell watchy = WatchyPowerShell();
 
 HRSRC myResource;
 HGLOBAL myResourceData;
