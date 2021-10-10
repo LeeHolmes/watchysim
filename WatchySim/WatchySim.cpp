@@ -38,7 +38,7 @@ BOOL WINAPI SaveBitmap(HWND hWnd);
 
 wchar_t szUserInput[80];
 BOOL CALLBACK InputBoxProc(HWND hwndDlg, UINT message, WPARAM wParam, LPARAM lParam);
-int getDayForDayName(LPWSTR dayName);
+int getDayOfWeek(int y, int m, int d);
 
 VOID OnPaint(HDC hdc)
 {
@@ -206,7 +206,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
             return 0;
 
         case ID_TIME_CUSTOM:
-            wcscpy_s(szUserInput, 80, L"Sunday 03/14/2021 16:20");
+            wcscpy_s(szUserInput, 80, L"03/14/2021 16:20");
             if (DialogBox(NULL,
                 MAKEINTRESOURCE(IDD_INPUT_BOX),
                 hWnd,
@@ -215,30 +215,22 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
                 curr_time = time(NULL);
                 localtime_s(&tm_local, &curr_time);
 
-                wchar_t dayOfWeek[20];
-                int parsed = swscanf_s(szUserInput, L"%s %2d/%2d/%4d %2d:%2d",
-                    dayOfWeek, 20, &tm_local.tm_mon, &tm_local.tm_mday, &tm_local.tm_year, &tm_local.tm_hour, &tm_local.tm_min);
-                if (parsed == 6)
+                int parsed = swscanf_s(szUserInput, L"%2d/%2d/%4d %2d:%2d",
+                    &tm_local.tm_mon, &tm_local.tm_mday, &tm_local.tm_year, &tm_local.tm_hour, &tm_local.tm_min);
+                if (parsed == 5)
                 {
+                    tm_local.tm_wday = getDayOfWeek(tm_local.tm_year, tm_local.tm_mon, tm_local.tm_mday);
                     tm_local.tm_year -= 1900;
                     tm_local.tm_mon++;
 
-                    tm_local.tm_wday = getDayForDayName(dayOfWeek);
-                    if (tm_local.tm_wday == -1)
-                    {
-                        MessageBox(hWnd, L"Please enter a date in the form of 'Weekday MM/DD/YYYY HH:MM'", L"Could not parse date", NULL);
-                    }
-                    else
-                    {
-                        watchy.setTime(tm_local);
+                    watchy.setTime(tm_local);
 
-                        InvalidateRect(hWnd, NULL, false);
-                        PostMessage(hWnd, WM_PAINT, 0, 0);
-                    }
+                    InvalidateRect(hWnd, NULL, false);
+                    PostMessage(hWnd, WM_PAINT, 0, 0);
                 }
                 else
                 {
-                    MessageBox(hWnd, L"Please enter a date in the form of 'Weekday MM/DD/YYYY HH:MM'", L"Could not parse date", NULL);
+                    MessageBox(hWnd, L"Please enter a date in the form of 'MM/DD/YYYY HH:MM'", L"Could not understand date", NULL);
                 }
             }
             return 0;
@@ -533,36 +525,12 @@ BOOL WINAPI SaveBitmap(HWND hWnd)
     return TRUE;
 }
 
-int getDayForDayName(LPWSTR dayName)
+int getDayOfWeek(int y, int m, int d)
 {
-    if (_wcsnicmp(L"Sunday", dayName, 20) == 0)
+    static int t[] = { 0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4 };
+    if (m < 3)
     {
-        return 0;
+        y -= 1;
     }
-    if (_wcsnicmp(L"Monday", dayName, 20) == 0)
-    {
-        return 1;
-    }
-    if (_wcsnicmp(L"Tuesday", dayName, 20) == 0)
-    {
-        return 2;
-    }
-    if (_wcsnicmp(L"Wednesday", dayName, 20) == 0)
-    {
-        return 3;
-    }
-    if (_wcsnicmp(L"Thursday", dayName, 20) == 0)
-    {
-        return 4;
-    }
-    if (_wcsnicmp(L"Friday", dayName, 20) == 0)
-    {
-        return 5;
-    }
-    if (_wcsnicmp(L"Saturday", dayName, 20) == 0)
-    {
-        return 6;
-    }
-
-    return -1;
+    return (y + y / 4 - y / 100 + y / 400 + t[m - 1] + d) % 7;
 }
