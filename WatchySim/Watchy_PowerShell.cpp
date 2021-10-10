@@ -30,4 +30,12 @@ void WatchyPowerShell::drawWatchFace() {
     
     strftime(buffer, sizeof(buffer), " %I:%M %p", &currentLocalTime);
     display.print(buffer);
+
+    // Show a low battery warning if appropriate
+    float battery = getBatteryVoltage();
+    if (battery < 3.80)
+    {
+        display.setCursor(170, 185);
+        display.print("BAT");
+    }
 }

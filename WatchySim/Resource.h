@@ -13,6 +13,9 @@
 #define IDI_SMALL                       108
 #define IDC_WATCHYSIM                   109
 #define IDR_MAINFRAME                   128
+#define IDD_INPUT_BOX                   129
+#define IDC_EDIT1                       1000
+#define IDC_EDIT_USERTEXT               1000
 #define ID_TIME_LONG                    32771
 #define ID_TIME_SHORT                   32772
 #define ID_TOOLS_SCREENSHOT             32773
@@ -47,6 +50,7 @@
 #define ID_TEMPERATURE_WARM             32802
 #define ID_TEMPERATURE_INFERNO          32803
 #define ID_TEMPERATURE_CANADA           32804
+#define ID_TIME_CUSTOM                  32805
 #define IDC_STATIC                      -1
 
 // Next default values for new objects
@@ -54,9 +58,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        129
-#define _APS_NEXT_COMMAND_VALUE         32805
-#define _APS_NEXT_CONTROL_VALUE         1000
+#define _APS_NEXT_RESOURCE_VALUE        130
+#define _APS_NEXT_COMMAND_VALUE         32806
+#define _APS_NEXT_CONTROL_VALUE         1001
 #define _APS_NEXT_SYMED_VALUE           110
 #endif
 #endif

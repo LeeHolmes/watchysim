@@ -36,6 +36,10 @@ Image *image;
 
 BOOL WINAPI SaveBitmap(HWND hWnd);
 
+wchar_t szUserInput[80];
+BOOL CALLBACK InputBoxProc(HWND hwndDlg, UINT message, WPARAM wParam, LPARAM lParam);
+int getDayForDayName(LPWSTR dayName);
+
 VOID OnPaint(HDC hdc)
 {
     if (image == NULL)
@@ -199,6 +203,44 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
 
             InvalidateRect(hWnd, NULL, false);
             PostMessage(hWnd, WM_PAINT, 0, 0);
+            return 0;
+
+        case ID_TIME_CUSTOM:
+            wcscpy_s(szUserInput, 80, L"Sunday 03/14/2021 16:20");
+            if (DialogBox(NULL,
+                MAKEINTRESOURCE(IDD_INPUT_BOX),
+                hWnd,
+                (DLGPROC)InputBoxProc) == IDOK)
+            {
+                curr_time = time(NULL);
+                localtime_s(&tm_local, &curr_time);
+
+                wchar_t dayOfWeek[20];
+                int parsed = swscanf_s(szUserInput, L"%s %2d/%2d/%4d %2d:%2d",
+                    dayOfWeek, 20, &tm_local.tm_mon, &tm_local.tm_mday, &tm_local.tm_year, &tm_local.tm_hour, &tm_local.tm_min);
+                if (parsed == 6)
+                {
+                    tm_local.tm_year -= 1900;
+                    tm_local.tm_mon++;
+
+                    tm_local.tm_wday = getDayForDayName(dayOfWeek);
+                    if (tm_local.tm_wday == -1)
+                    {
+                        MessageBox(hWnd, L"Please enter a date in the form of 'Weekday MM/DD/YYYY HH:MM'", L"Could not parse date", NULL);
+                    }
+                    else
+                    {
+                        watchy.setTime(tm_local);
+
+                        InvalidateRect(hWnd, NULL, false);
+                        PostMessage(hWnd, WM_PAINT, 0, 0);
+                    }
+                }
+                else
+                {
+                    MessageBox(hWnd, L"Please enter a date in the form of 'Weekday MM/DD/YYYY HH:MM'", L"Could not parse date", NULL);
+                }
+            }
             return 0;
 
         case ID_BATTERY_DEAD:
@@ -411,6 +453,33 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
     }
 } // WndProc
 
+BOOL CALLBACK InputBoxProc(HWND hwndDlg, UINT message, WPARAM wParam, LPARAM lParam)
+{
+    switch (message)
+    {
+    case WM_INITDIALOG:
+        SetFocus(GetDlgItem(hwndDlg, IDC_EDIT_USERTEXT));
+        SetDlgItemText(hwndDlg, IDC_EDIT_USERTEXT, szUserInput);
+        break;
+
+    case WM_COMMAND:
+        switch (LOWORD(wParam))
+        {
+        case IDOK:
+            if (!GetDlgItemText(hwndDlg, IDC_EDIT_USERTEXT, szUserInput, 80))
+            {
+                *szUserInput = 0;
+            }
+
+            // Fall through. 
+
+        case IDCANCEL:
+            EndDialog(hwndDlg, wParam);
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
 BOOL WINAPI SaveBitmap(HWND hWnd)
 {
     OPENFILENAME ofn;
@@ -462,4 +531,38 @@ BOOL WINAPI SaveBitmap(HWND hWnd)
     }
 
     return TRUE;
+}
+
+int getDayForDayName(LPWSTR dayName)
+{
+    if (_wcsnicmp(L"Sunday", dayName, 20) == 0)
+    {
+        return 0;
+    }
+    if (_wcsnicmp(L"Monday", dayName, 20) == 0)
+    {
+        return 1;
+    }
+    if (_wcsnicmp(L"Tuesday", dayName, 20) == 0)
+    {
+        return 2;
+    }
+    if (_wcsnicmp(L"Wednesday", dayName, 20) == 0)
+    {
+        return 3;
+    }
+    if (_wcsnicmp(L"Thursday", dayName, 20) == 0)
+    {
+        return 4;
+    }
+    if (_wcsnicmp(L"Friday", dayName, 20) == 0)
+    {
+        return 5;
+    }
+    if (_wcsnicmp(L"Saturday", dayName, 20) == 0)
+    {
+        return 6;
+    }
+
+    return -1;
 }

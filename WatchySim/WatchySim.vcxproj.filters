@@ -141,7 +141,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Watchy_7_SEG.cpp">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
