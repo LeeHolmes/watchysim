@@ -130,17 +130,17 @@ void DisplaySim::setContext(Graphics *graphics, HDC *hdc)
     this->hdc = hdc;
 }
 
-void DisplaySim::drawBitmap(uint16_t x, uint16_t y, const uint8_t *bitmap, uint16_t w, uint16_t h, uint16_t color)
+void DisplaySim::drawBitmap(int16_t x, int16_t y, const uint8_t *bitmap, uint16_t w, uint16_t h, uint16_t color)
 {
     drawBitmapRaw(x, y, bitmap, w, h, color, false);
 }
 
-void DisplaySim::drawFontBitmap(uint16_t x, uint16_t y, const uint8_t *bitmap, uint16_t w, uint16_t h, uint16_t color)
+void DisplaySim::drawFontBitmap(int16_t x, int16_t y, const uint8_t *bitmap, uint16_t w, uint16_t h, uint16_t color)
 {
     drawBitmapRaw(x, y, bitmap, w, h, color, true);
 }
 
-void DisplaySim::drawBitmapRaw(uint16_t x, uint16_t y, const uint8_t *bitmap, uint16_t w, uint16_t h, uint16_t color, bool rasterMode)
+void DisplaySim::drawBitmapRaw(int16_t x, int16_t y, const uint8_t *bitmap, uint16_t w, uint16_t h, uint16_t color, bool rasterMode)
 {
     int bitmapOffset = 0;
     if (!rasterMode)

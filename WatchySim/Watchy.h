@@ -42,7 +42,7 @@ typedef struct {
 class DisplaySim {
 public:
     void fillScreen(uint16_t color);
-    void drawBitmap(uint16_t x, uint16_t y, const uint8_t *bitmap, uint16_t w, uint16_t h, uint16_t color);
+    void drawBitmap(int16_t x, int16_t y, const uint8_t *bitmap, uint16_t w, uint16_t h, uint16_t color);
 
     void setContext(Graphics *graphics, HDC *hdc);
 
@@ -81,8 +81,8 @@ public:
     void drawFastHLine(int16_t x, int16_t y, int16_t w, uint16_t color);
 
 private:
-    void drawBitmapRaw(uint16_t x, uint16_t y, const uint8_t *bitmap, uint16_t w, uint16_t h, uint16_t color, bool rasterMode);
-    void drawFontBitmap(uint16_t x, uint16_t y, const uint8_t *bitmap, uint16_t w, uint16_t h, uint16_t color);
+    void drawBitmapRaw(int16_t x, int16_t y, const uint8_t *bitmap, uint16_t w, uint16_t h, uint16_t color, bool rasterMode);
+    void drawFontBitmap(int16_t x, int16_t y, const uint8_t *bitmap, uint16_t w, uint16_t h, uint16_t color);
 
     void charBounds(unsigned char c, int16_t *x, int16_t *y,
         int16_t *minx, int16_t *miny, int16_t *maxx,
@@ -92,8 +92,8 @@ private:
     Graphics *graphics;
     HDC *hdc;
 
-    uint16_t currentX;
-    uint16_t currentY;
+    int16_t currentX;
+    int16_t currentY;
     uint16_t currentFontColor;
     const GFXfont *currentFont;
 
