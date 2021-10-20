@@ -191,6 +191,7 @@
     <ClCompile Include="Watchy_7_SEG.cpp" />
     <ClCompile Include="Watchy_AnalogGabel.cpp" />
     <ClCompile Include="Watchy_DOS.cpp" />
+    <ClCompile Include="Watchy_Draw_Test.cpp" />
     <ClCompile Include="Watchy_MacPaint.cpp" />
     <ClCompile Include="Watchy_Pokemon.cpp" />
     <ClCompile Include="Watchy_PowerShell.cpp" />

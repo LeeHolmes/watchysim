@@ -143,6 +143,9 @@
     <ClCompile Include="Watchy_7_SEG.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Watchy_Draw_Test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="WatchySim.rc">
