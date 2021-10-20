@@ -12,7 +12,7 @@ WatchySim gives you a Watchy-like SDK to develop your watch faces, but lets you 
 
 ## Building WatchySim
 
-WatchySim builds under Visual Studio 2017 Community Edition.
+WatchySim builds under Visual Studio [Community Edition](https://visualstudio.microsoft.com/vs/community/). This is a free version of Visual Studio that anybody can download and use.
 
 ## Testing a Watch Face
 
