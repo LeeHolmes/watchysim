@@ -53,12 +53,12 @@ void Watchy::setTemperatureUnit(char* temperatureUnit)
         // Convert Celsius to Fahrenheit
         if (strcmp(temperatureUnit, "imperial") == 0)
         {
-            currentWeather.temperature = (int8_t)currentWeather.temperature * 9.0 / 5.0 + 32.0;
+            currentWeather.temperature = (int8_t) (currentWeather.temperature * 9.0 / 5.0 + 32.0);
         }
         else
         {
             // Convert Fahrenheit to Celsius
-            currentWeather.temperature = (int8_t) (currentWeather.temperature - 32) * 5.0 / 9.0;
+            currentWeather.temperature = (int8_t) ((currentWeather.temperature - 32) * 5.0 / 9.0);
         }      
     }
 
@@ -68,7 +68,7 @@ void Watchy::setTemperatureUnit(char* temperatureUnit)
 void Watchy::setTemperature(int8_t temperature)
 {
     if (strcmp(TEMP_UNIT, "imperial") == 0) {
-        temperature = (int8_t)temperature * 9.0 / 5.0 + 32.0; //fahrenheit
+        temperature = (int8_t) (temperature * 9.0 / 5.0 + 32.0); //fahrenheit
     }
 
     currentWeather.temperature = temperature;
