@@ -18,6 +18,7 @@
 //#include "Watchy_AnalogGabel.h"
 #include "Watchy_PowerShell.h"
 //#include "Watchy_7_SEG.h"
+//#include "Watchy_Draw_Test.h"
 
 //WatchyDOS watchy = WatchyDOS();
 //WatchyTetris watchy = WatchyTetris();
@@ -26,6 +27,7 @@
 //WatchyAnalogGabel watchy = WatchyAnalogGabel();
 WatchyPowerShell watchy = WatchyPowerShell();
 //Watchy7SEG watchy = Watchy7SEG();
+//WatchyDrawTest watchy = WatchyDrawTest();
 
 HRSRC myResource;
 HGLOBAL myResourceData;
