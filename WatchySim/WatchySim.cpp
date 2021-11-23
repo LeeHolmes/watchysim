@@ -16,18 +16,22 @@
 //#include "Watchy_MacPaint.h"
 //#include "Watchy_Pokemon.h"
 //#include "Watchy_AnalogGabel.h"
-#include "Watchy_PowerShell.h"
+//#include "Watchy_PowerShell.h"
 //#include "Watchy_7_SEG.h"
 //#include "Watchy_Draw_Test.h"
+//#include "Watchy_scene.h"
+#include "niobe.h"
 
 //WatchyDOS watchy = WatchyDOS();
 //WatchyTetris watchy = WatchyTetris();
 //WatchyMacPaint watchy = WatchyMacPaint();
 //WatchyPokemon watchy = WatchyPokemon();
 //WatchyAnalogGabel watchy = WatchyAnalogGabel();
-WatchyPowerShell watchy = WatchyPowerShell();
+//WatchyPowerShell watchy = WatchyPowerShell();
 //Watchy7SEG watchy = Watchy7SEG();
 //WatchyDrawTest watchy = WatchyDrawTest();
+//Scene watchy = Scene();
+Niobe watchy = Niobe();
 
 HRSRC myResource;
 HGLOBAL myResourceData;
