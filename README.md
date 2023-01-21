@@ -29,4 +29,4 @@ WatchySim comes with most of the example Watchy watch faces by default. You can 
 - Some of what watchysim simulates might not be faithful to what happens in an actual physical Watchy. If you find inaccuracies, please contribute a PR!
 
 ## License
-The contens of this repository is under an [MIT License](https://github.com/LeeHolmes/watchysim/blob/main/LICENSE).
+The contents of this repository is under an [MIT License](https://github.com/LeeHolmes/watchysim/blob/main/LICENSE).
