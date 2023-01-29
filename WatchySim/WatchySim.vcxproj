@@ -23,32 +23,32 @@
     <ProjectGuid>{6FCBFCA5-1352-4BCD-B09C-A8B745372B2D}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>WatchySim</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -89,7 +89,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;WATCHY_SIM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -104,7 +104,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;WATCHY_SIM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -121,7 +121,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;WATCHY_SIM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -140,7 +140,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;WATCHY_SIM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -151,57 +151,49 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="DSEG7_Classic_Bold_25.h" />
+    <ClInclude Include="arduino.h" />
+    <ClInclude Include="config.h" />
     <ClInclude Include="DSEG7_Classic_Bold_53.h" />
-    <ClInclude Include="DSEG7_Classic_Regular_15.h" />
-    <ClInclude Include="DSEG7_Classic_Regular_39.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="FreeMono9pt7b.h" />
     <ClInclude Include="FreeMonoBold9pt7b.h" />
-    <ClInclude Include="FreeMonoOblique24pt7b.h" />
-    <ClInclude Include="FreeSansBold9pt7b.h" />
-    <ClInclude Include="FreeSerifBold12pt7b.h" />
-    <ClInclude Include="FreeSerifBoldItalic4pt7b.h" />
-    <ClInclude Include="FreeSerifBoldItalic9pt7b.h" />
-    <ClInclude Include="FreeSerifItalic9pt7b.h" />
     <ClInclude Include="gfxfont.h" />
-    <ClInclude Include="macpaint.h" />
-    <ClInclude Include="ModernDOS8x168pt7b.h" />
-    <ClInclude Include="niobe.h" />
+    <ClInclude Include="WatchFaces\AnalogGabel\FreeSerifBold12pt7b.h" />
+    <ClInclude Include="WatchFaces\AnalogGabel\FreeSerifBoldItalic4pt7b.h" />
+    <ClInclude Include="WatchFaces\AnalogGabel\FreeSerifBoldItalic9pt7b.h" />
+    <ClInclude Include="WatchFaces\AnalogGabel\FreeSerifItalic9pt7b.h" />
+    <ClInclude Include="WatchFaces\Scene\ModernDOS8x168pt7b.h" />
+    <ClInclude Include="WatchFaces\Niobe\niobe.h" />
     <ClInclude Include="pgmspace.h" />
-    <ClInclude Include="pokemon.h" />
-    <ClInclude Include="powershell.h" />
-    <ClInclude Include="Px437_IBM_BIOS5pt7b.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="scene.h" />
+    <ClInclude Include="WatchFaces\Scene\scene.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="tetris.h" />
+    <ClInclude Include="WatchFaces\7_SEG\Watchy_7_SEG.h" />
+    <ClInclude Include="WatchFaces\DOS\Watchy_DOS.h" />
+    <ClInclude Include="WatchFaces\MacPaint\Watchy_MacPaint.h" />
+    <ClInclude Include="WatchFaces\Mario\Watchy_Mario.h" />
+    <ClInclude Include="WatchFaces\Pokemon\Watchy_Pokemon.h" />
+    <ClInclude Include="WatchFaces\Tetris\Watchy_Tetris.h" />
     <ClInclude Include="Watchy.h" />
     <ClInclude Include="WatchySim.h" />
-    <ClInclude Include="analoggabel.h" />
-    <ClInclude Include="Watchy_7_SEG.h" />
-    <ClInclude Include="Watchy_7_SEG_icons.h" />
-    <ClInclude Include="Watchy_AnalogGabel.h" />
-    <ClInclude Include="Watchy_DOS.h" />
-    <ClInclude Include="Watchy_MacPaint.h" />
-    <ClInclude Include="Watchy_Pokemon.h" />
-    <ClInclude Include="Watchy_PowerShell.h" />
-    <ClInclude Include="Watchy_scene.h" />
-    <ClInclude Include="Watchy_Tetris.h" />
+    <ClInclude Include="WatchFaces\AnalogGabel\analoggabel.h" />
+    <ClInclude Include="WatchFaces\AnalogGabel\Watchy_AnalogGabel.h" />
+    <ClInclude Include="WatchFaces\PowerShell\Watchy_PowerShell.h" />
+    <ClInclude Include="WatchFaces\Scene\Watchy_scene.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="niobe.cpp" />
-    <ClCompile Include="scene.cpp" />
+    <ClCompile Include="WatchFaces\Niobe\niobe.cpp" />
+    <ClCompile Include="WatchFaces\Scene\scene.cpp" />
+    <ClCompile Include="WatchFaces\7_SEG\Watchy_7_SEG.cpp" />
+    <ClCompile Include="WatchFaces\DOS\Watchy_DOS.cpp" />
+    <ClCompile Include="WatchFaces\MacPaint\Watchy_MacPaint.cpp" />
+    <ClCompile Include="WatchFaces\Mario\Watchy_Mario.cpp" />
+    <ClCompile Include="WatchFaces\Pokemon\Watchy_Pokemon.cpp" />
+    <ClCompile Include="WatchFaces\Tetris\Watchy_Tetris.cpp" />
     <ClCompile Include="Watchy.cpp" />
     <ClCompile Include="WatchySim.cpp" />
-    <ClCompile Include="Watchy_7_SEG.cpp" />
-    <ClCompile Include="Watchy_AnalogGabel.cpp" />
-    <ClCompile Include="Watchy_DOS.cpp" />
-    <ClCompile Include="Watchy_Draw_Test.cpp" />
-    <ClCompile Include="Watchy_MacPaint.cpp" />
-    <ClCompile Include="Watchy_Pokemon.cpp" />
-    <ClCompile Include="Watchy_PowerShell.cpp" />
-    <ClCompile Include="Watchy_Tetris.cpp" />
+    <ClCompile Include="WatchFaces\AnalogGabel\Watchy_AnalogGabel.cpp" />
+    <ClCompile Include="WatchFaces\DrawTest\Watchy_Draw_Test.cpp" />
+    <ClCompile Include="WatchFaces\PowerShell\Watchy_PowerShell.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="WatchySim.rc" />

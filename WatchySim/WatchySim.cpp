@@ -11,27 +11,34 @@
 
 #include "Watchy.h"
 
-//#include "Watchy_DOS.h"
-//#include "Watchy_Tetris.h"
-//#include "Watchy_MacPaint.h"
-//#include "Watchy_Pokemon.h"
-//#include "Watchy_AnalogGabel.h"
-#include "Watchy_PowerShell.h"
-//#include "Watchy_7_SEG.h"
-//#include "Watchy_Draw_Test.h"
-//#include "Watchy_scene.h"
-//#include "niobe.h"
+//#include "WatchFaces/7_SEG/Watchy_7_SEG.h"
+//#include "WatchFaces/AnalogGabel/Watchy_AnalogGabel.h"
+//#include "WatchFaces/DOS/Watchy_DOS.h"
+//#include "WatchFaces/MacPaint/Watchy_MacPaint.h"
+//#include "WatchFaces/Mario/Watchy_Mario.h"
+//#include "WatchFaces/Pokemon/Watchy_Pokemon.h"
+//#include "WatchFaces/PowerShell/Watchy_PowerShell.h"
+//#include "WatchFaces/Tetris/Watchy_Tetris.h"
 
-//WatchyDOS watchy = WatchyDOS();
-//WatchyTetris watchy = WatchyTetris();
-//WatchyMacPaint watchy = WatchyMacPaint();
-//WatchyPokemon watchy = WatchyPokemon();
-//WatchyAnalogGabel watchy = WatchyAnalogGabel();
-WatchyPowerShell watchy = WatchyPowerShell();
+//#include "WatchFaces/DrawTest/Watchy_Draw_Test.h"
+//#include "WatchFaces/Niobe/niobe.h"
+//#include "WatchFaces/Scene/Watchy_scene.h"
+
+
+Watchy watchy = Watchy();  // Basic
 //Watchy7SEG watchy = Watchy7SEG();
+//WatchyAnalogGabel watchy = WatchyAnalogGabel();
+//WatchyDOS watchy = WatchyDOS();
+//WatchyMacPaint watchy = WatchyMacPaint();
+//WatchyMario watchy = WatchyMario();
+//WatchyPowerShell watchy = WatchyPowerShell();
+//WatchyPokemon watchy = WatchyPokemon();
+//WatchyTetris watchy = WatchyTetris();
+
 //WatchyDrawTest watchy = WatchyDrawTest();
-//Scene watchy = Scene();
 //Niobe watchy = Niobe();
+//Scene watchy = Scene();
+
 
 HRSRC myResource;
 HGLOBAL myResourceData;
@@ -396,14 +403,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
             return 0;
 
         case ID_TEMPERATURE_CELSIUS:
-            watchy.setTemperatureUnit((char *)"metric");
+            watchy.setTemperatureUnitMetric(true);
             InvalidateRect(hWnd, NULL, false);
             PostMessage(hWnd, WM_PAINT, 0, 0);
 
             return 0;
 
         case ID_TEMPERATURE_FAHRENHEIT:
-            watchy.setTemperatureUnit((char *)"imperial");
+            watchy.setTemperatureUnitMetric(false);
             InvalidateRect(hWnd, NULL, false);
             PostMessage(hWnd, WM_PAINT, 0, 0);
 

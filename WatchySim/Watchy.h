@@ -12,6 +12,9 @@
 
 #include "gfxfont.h"
 #include "FreeMonoBold9pt7b.h"
+#include "arduino.h"
+#include "config.h"
+#include "DSEG7_Classic_Bold_53.h"
 
 using namespace Gdiplus;
 using namespace std;
@@ -139,6 +142,9 @@ private:
 typedef struct weatherData {
     int8_t temperature;
     int16_t weatherConditionCode;
+    bool isMetric;
+    String weatherDescription;
+    bool external;
 } weatherData;
 
 class SensorSim {
@@ -174,7 +180,7 @@ public:
     void setSteps(uint32_t stepCount);
     void setWeatherCode(int16_t weatherConditionCode);
     
-    void setTemperatureUnit(char* temperatureUnit);
+    void setTemperatureUnitMetric(bool isMetric);
     void setTemperature(int8_t temperature);
 
 protected:
@@ -185,11 +191,10 @@ protected:
 
     bool BLE_CONFIGURED = true;
     bool WIFI_CONFIGURED = true;
-    char TEMP_UNIT[10] = "imperial";
     
 private:
     Graphics *graphics;
     float currentVoltage = 3.96f;
-    weatherData currentWeather = { 65, 550 };
+    weatherData currentWeather = { 20, 550, true };
 };
 #endif
