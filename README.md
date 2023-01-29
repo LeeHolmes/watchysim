@@ -27,3 +27,6 @@ WatchySim comes with most of the example Watchy watch faces by default. You can 
 - Since WatchySim is a simulation of the Watchy SDK, it implements the bare minimum of the Arduino SDK. Watch faces that rely on Arduino libraries will not work without you implementing (and hopefully contributing back a PR!) a simulation of those APIs.
 - WatchySim is incomplete. It currently only implements enough of the Watchy SDK to get a set of popular / example watch faces building and simulating. If you want to simulate additional Watchy features that aren't currently implemented, you can add these to this project's version of `Watchy.h` and `Watchy.cpp`. Please contribute back a PR if you do, so the whole community can benefit.
 - Some of what watchysim simulates might not be faithful to what happens in an actual physical Watchy. If you find inaccuracies, please contribute a PR!
+
+## License
+The contents of this repository is under an [MIT License](https://github.com/LeeHolmes/watchysim/blob/main/LICENSE).
