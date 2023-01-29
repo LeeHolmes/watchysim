@@ -5,7 +5,20 @@ Watchy::Watchy() {
     resetTime();
 }
 
-void Watchy::drawWatchFace() {}
+void Watchy::drawWatchFace() {
+    display.setFont(&DSEG7_Classic_Bold_53);
+    display.setTextColor(GxEPD_WHITE);
+    display.setCursor(5, 53 + 60);
+    if (currentTime.Hour < 10) {
+        display.print("0");
+    }
+    display.print(currentTime.Hour);
+    display.print(":");
+    if (currentTime.Minute < 10) {
+        display.print("0");
+    }
+    display.println(currentTime.Minute);
+}
 
 void Watchy::init() {}
 
@@ -45,29 +58,28 @@ void Watchy::setWeatherCode(int16_t weatherConditionCode)
     currentWeather.weatherConditionCode = weatherConditionCode;
 }
 
-void Watchy::setTemperatureUnit(char* temperatureUnit)
+void Watchy::setTemperatureUnitMetric(bool isMetric)
 {
     // If they are switching units, convert the temperature
-    if (strcmp(TEMP_UNIT, temperatureUnit) != 0)
+    if (currentWeather.isMetric != isMetric)
     {
-        // Convert Celsius to Fahrenheit
-        if (strcmp(temperatureUnit, "imperial") == 0)
+        currentWeather.isMetric = isMetric;
+        // Convert Fahrenheit to Celsius
+        if (isMetric)
         {
-            currentWeather.temperature = (int8_t) (currentWeather.temperature * 9.0 / 5.0 + 32.0);
+            currentWeather.temperature = (int8_t)((currentWeather.temperature - 32) * 5.0 / 9.0);
         }
         else
         {
-            // Convert Fahrenheit to Celsius
-            currentWeather.temperature = (int8_t) ((currentWeather.temperature - 32) * 5.0 / 9.0);
-        }      
+            // Convert Celsius to Fahrenheit
+            currentWeather.temperature = (int8_t)(currentWeather.temperature * 9.0 / 5.0 + 32.0);
+        }
     }
-
-    strncpy_s(TEMP_UNIT, temperatureUnit, 10);
 }
 
 void Watchy::setTemperature(int8_t temperature)
 {
-    if (strcmp(TEMP_UNIT, "imperial") == 0) {
+    if (!currentWeather.isMetric) {
         temperature = (int8_t) (temperature * 9.0 / 5.0 + 32.0); //fahrenheit
     }
 
