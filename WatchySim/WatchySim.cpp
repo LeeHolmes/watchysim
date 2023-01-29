@@ -11,7 +11,7 @@
 
 #include "Watchy.h"
 
-//#include "WatchFaces/7_SEG/Watchy_7_SEG.h"
+#include "WatchFaces/7_SEG/Watchy_7_SEG.h"
 //#include "WatchFaces/AnalogGabel/Watchy_AnalogGabel.h"
 //#include "WatchFaces/DOS/Watchy_DOS.h"
 //#include "WatchFaces/MacPaint/Watchy_MacPaint.h"
@@ -25,8 +25,8 @@
 //#include "WatchFaces/Scene/Watchy_scene.h"
 
 
-Watchy watchy = Watchy();  // Basic
-//Watchy7SEG watchy = Watchy7SEG();
+//Watchy watchy = Watchy();  // Basic
+Watchy7SEG watchy = Watchy7SEG();
 //WatchyAnalogGabel watchy = WatchyAnalogGabel();
 //WatchyDOS watchy = WatchyDOS();
 //WatchyMacPaint watchy = WatchyMacPaint();
