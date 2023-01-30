@@ -109,23 +109,15 @@ void Watchy7SEG::drawWeather(){
 
     int8_t temperature = currentWeather.temperature;
     int16_t weatherConditionCode = currentWeather.weatherConditionCode;
-#ifdef WATCHY_SIM
-    char buffer[_MAX_INT_DIG];
-    _itoa_s<_MAX_INT_DIG>(temperature, buffer, 10);
-    String temperature_string = String(buffer);
-#else // WATCHY_SIM
-    String temperature_string = String(temperature);
-#endif // WATCHY_SIM
-
     display.setFont(&DSEG7_Classic_Regular_39);
     int16_t  x1, y1;
     uint16_t w, h;
-    display.getTextBounds(String(temperature_string), 0, 0, &x1, &y1, &w, &h);
+    display.getTextBounds(String(temperature), 0, 0, &x1, &y1, &w, &h);
     if(159 - w - x1 > 87){
         display.setCursor(159 - w - x1, 150);
     }else{
         display.setFont(&DSEG7_Classic_Bold_25);
-        display.getTextBounds(String(temperature_string), 0, 0, &x1, &y1, &w, &h);
+        display.getTextBounds(String(temperature), 0, 0, &x1, &y1, &w, &h);
         display.setCursor(159 - w - x1, 136);
     }
     display.println(temperature);

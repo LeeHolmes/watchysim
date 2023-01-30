@@ -8,11 +8,11 @@
 #include <string>
 
 #define PROGMEM
-#define String string
 
 #include "gfxfont.h"
 #include "FreeMonoBold9pt7b.h"
 #include "arduino.h"
+#include "arduino/String.h"
 #include "config.h"
 #include "DSEG7_Classic_Bold_53.h"
 
