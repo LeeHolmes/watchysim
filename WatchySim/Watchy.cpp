@@ -53,9 +53,13 @@ void Watchy::setSteps(uint32_t stepCount)
     sensor.setSteps(stepCount);
 }
 
-void Watchy::setWeatherCode(int16_t weatherConditionCode, bool external)
+void Watchy::setWeatherCode(int16_t weatherConditionCode)
 {
     currentWeather.weatherConditionCode = weatherConditionCode;
+}
+
+void Watchy::setWeatherExternal(bool external)
+{
     currentWeather.external = external;
 }
 

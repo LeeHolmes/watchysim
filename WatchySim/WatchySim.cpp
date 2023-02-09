@@ -299,6 +299,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
 
         case ID_WIFI_ON:
             watchy.setWifi(true);
+            watchy.setWeatherExternal(true);
             InvalidateRect(hWnd, NULL, false);
             PostMessage(hWnd, WM_PAINT, 0, 0);
 
@@ -306,6 +307,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
 
         case ID_WIFI_OFF:
             watchy.setWifi(false);
+            // Watchy SDK sets the weather code to 800 and flips the external flag when WiFi fails to connect
+            watchy.setWeatherCode(800);
+            watchy.setWeatherExternal(false);
             InvalidateRect(hWnd, NULL, false);
             PostMessage(hWnd, WM_PAINT, 0, 0);
 
@@ -341,6 +345,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
 
         case ID_WEATHER_CLOUDY:
             watchy.setWeatherCode(802);
+            watchy.setWeatherExternal(true);
             InvalidateRect(hWnd, NULL, false);
             PostMessage(hWnd, WM_PAINT, 0, 0);
 
@@ -348,6 +353,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
 
         case ID_WEATHER_FEWCLOUDS:
             watchy.setWeatherCode(801);
+            watchy.setWeatherExternal(true);
             InvalidateRect(hWnd, NULL, false);
             PostMessage(hWnd, WM_PAINT, 0, 0);
 
@@ -355,6 +361,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
 
         case ID_WEATHER_CLEAR:
             watchy.setWeatherCode(800);
+            watchy.setWeatherExternal(true);
             InvalidateRect(hWnd, NULL, false);
             PostMessage(hWnd, WM_PAINT, 0, 0);
 
@@ -362,6 +369,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
 
         case ID_WEATHER_ATMOSPHERE:
             watchy.setWeatherCode(750);
+            watchy.setWeatherExternal(true);
             InvalidateRect(hWnd, NULL, false);
             PostMessage(hWnd, WM_PAINT, 0, 0);
 
@@ -369,6 +377,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
 
         case ID_WEATHER_SNOW:
             watchy.setWeatherCode(650);
+            watchy.setWeatherExternal(true);
             InvalidateRect(hWnd, NULL, false);
             PostMessage(hWnd, WM_PAINT, 0, 0);
 
@@ -376,6 +385,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
 
         case ID_WEATHER_RAIN:
             watchy.setWeatherCode(550);
+            watchy.setWeatherExternal(true);
             InvalidateRect(hWnd, NULL, false);
             PostMessage(hWnd, WM_PAINT, 0, 0);
 
@@ -383,6 +393,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
 
         case ID_WEATHER_DRIZZLE:
             watchy.setWeatherCode(350);
+            watchy.setWeatherExternal(true);
             InvalidateRect(hWnd, NULL, false);
             PostMessage(hWnd, WM_PAINT, 0, 0);
 
@@ -390,6 +401,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
 
         case ID_WEATHER_THUNDERSTORM:
             watchy.setWeatherCode(250);
+            watchy.setWeatherExternal(true);
             InvalidateRect(hWnd, NULL, false);
             PostMessage(hWnd, WM_PAINT, 0, 0);
 
@@ -397,13 +409,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
 
         case ID_WEATHER_OTHER:
             watchy.setWeatherCode(150);
-            InvalidateRect(hWnd, NULL, false);
-            PostMessage(hWnd, WM_PAINT, 0, 0);
-
-            return 0;
-
-        case ID_WEATHER_INTERNAL:
-            watchy.setWeatherCode(800, false);
+            watchy.setWeatherExternal(true);
             InvalidateRect(hWnd, NULL, false);
             PostMessage(hWnd, WM_PAINT, 0, 0);
 
@@ -425,6 +431,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
 
         case ID_TEMPERATURE_CANADA:
             watchy.setTemperature(-45);
+            watchy.setWeatherExternal(true);
             InvalidateRect(hWnd, NULL, false);
             PostMessage(hWnd, WM_PAINT, 0, 0);
 
@@ -432,6 +439,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
 
         case ID_TEMPERATURE_CHILLY:
             watchy.setTemperature(7);
+            watchy.setWeatherExternal(true);
             InvalidateRect(hWnd, NULL, false);
             PostMessage(hWnd, WM_PAINT, 0, 0);
 
@@ -439,6 +447,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
 
         case ID_TEMPERATURE_WARM:
             watchy.setTemperature(15);
+            watchy.setWeatherExternal(true);
             InvalidateRect(hWnd, NULL, false);
             PostMessage(hWnd, WM_PAINT, 0, 0);
 
@@ -446,6 +455,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
 
         case ID_TEMPERATURE_INFERNO:
             watchy.setTemperature(40);
+            watchy.setWeatherExternal(true);
             InvalidateRect(hWnd, NULL, false);
             PostMessage(hWnd, WM_PAINT, 0, 0);
 
