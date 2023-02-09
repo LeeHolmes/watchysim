@@ -178,7 +178,7 @@ public:
     void setBluetooth(bool enabled);
     void setWifi(bool enabled);
     void setSteps(uint32_t stepCount);
-    void setWeatherCode(int16_t weatherConditionCode);
+    void setWeatherCode(int16_t weatherConditionCode, bool external = true);
     
     void setTemperatureUnitMetric(bool isMetric);
     void setTemperature(int8_t temperature);
@@ -195,6 +195,6 @@ protected:
 private:
     Graphics *graphics;
     float currentVoltage = 3.96f;
-    weatherData currentWeather = { 20, 550, true };
+    weatherData currentWeather = { 20, 550, true, "", true};
 };
 #endif

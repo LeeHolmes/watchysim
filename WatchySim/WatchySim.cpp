@@ -402,6 +402,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
 
             return 0;
 
+        case ID_WEATHER_INTERNAL:
+            watchy.setWeatherCode(800, false);
+            InvalidateRect(hWnd, NULL, false);
+            PostMessage(hWnd, WM_PAINT, 0, 0);
+
+            return 0;
+
         case ID_TEMPERATURE_CELSIUS:
             watchy.setTemperatureUnitMetric(true);
             InvalidateRect(hWnd, NULL, false);
