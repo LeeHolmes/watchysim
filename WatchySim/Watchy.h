@@ -32,6 +32,9 @@ using namespace std;
 
 #define WEATHER_UPDATE_INTERVAL 30 //minutes
 
+#define WATCHY_DEFAULT_TEMP 20
+#define WATCHY_INTERNAL_TEMP 27
+
 typedef struct {
     uint8_t Second;
     uint8_t Minute;
@@ -179,9 +182,11 @@ public:
     void setWifi(bool enabled);
     void setSteps(uint32_t stepCount);
     void setWeatherCode(int16_t weatherConditionCode);
-    
+    void setWeatherExternal(bool external = true);
+        
     void setTemperatureUnitMetric(bool isMetric);
     void setTemperature(int8_t temperature);
+    int8_t getTemperature();
 
 protected:
     const char* dayShortStr(uint8_t day);
@@ -195,6 +200,6 @@ protected:
 private:
     Graphics *graphics;
     float currentVoltage = 3.96f;
-    weatherData currentWeather = { 20, 550, true };
+    weatherData currentWeather = { WATCHY_DEFAULT_TEMP, 550, true, "", true};
 };
 #endif

@@ -58,6 +58,11 @@ void Watchy::setWeatherCode(int16_t weatherConditionCode)
     currentWeather.weatherConditionCode = weatherConditionCode;
 }
 
+void Watchy::setWeatherExternal(bool external)
+{
+    currentWeather.external = external;
+}
+
 void Watchy::setTemperatureUnitMetric(bool isMetric)
 {
     // If they are switching units, convert the temperature
@@ -84,6 +89,11 @@ void Watchy::setTemperature(int8_t temperature)
     }
 
     currentWeather.temperature = temperature;
+}
+
+int8_t Watchy::getTemperature()
+{
+    return currentWeather.temperature;
 }
 
 void Watchy::setTime(tm newTime)
