@@ -300,6 +300,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
         case ID_WIFI_ON:
             watchy.setWifi(true);
             watchy.setWeatherExternal(true);
+            // If the temperature hasn't been changed from internal put it back to default
+            if (watchy.getTemperature() == WATCHY_INTERNAL_TEMP) {
+                watchy.setTemperature(WATCHY_DEFAULT_TEMP);
+            }
             InvalidateRect(hWnd, NULL, false);
             PostMessage(hWnd, WM_PAINT, 0, 0);
 
@@ -310,6 +314,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
             // Watchy SDK sets the weather code to 800 and flips the external flag when WiFi fails to connect
             watchy.setWeatherCode(800);
             watchy.setWeatherExternal(false);
+            watchy.setTemperature(WATCHY_INTERNAL_TEMP);
             InvalidateRect(hWnd, NULL, false);
             PostMessage(hWnd, WM_PAINT, 0, 0);
 

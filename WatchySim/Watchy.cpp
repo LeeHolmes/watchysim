@@ -91,6 +91,11 @@ void Watchy::setTemperature(int8_t temperature)
     currentWeather.temperature = temperature;
 }
 
+int8_t Watchy::getTemperature()
+{
+    return currentWeather.temperature;
+}
+
 void Watchy::setTime(tm newTime)
 {
     currentTime.Wday = newTime.tm_wday + 1;
