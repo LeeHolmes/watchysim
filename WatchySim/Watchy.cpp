@@ -1,6 +1,10 @@
 #include <ctime>
 #include "Watchy.h"
 
+#ifndef _MAX_INT_DIG
+#define _MAX_INT_DIG    32
+#endif
+
 Watchy::Watchy() {
     resetTime();
 }
