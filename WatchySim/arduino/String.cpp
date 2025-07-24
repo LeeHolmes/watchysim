@@ -23,8 +23,41 @@
 #include "Common.h"
 
 #include <float.h>
+#include <cstdio>
+#include <cstdlib>
 
 namespace arduino {
+
+// Helper functions for cross-platform number to string conversion
+static void itoa_compat(int value, char* str, int base) {
+    if (base == 10) {
+        sprintf(str, "%d", value);
+    } else if (base == 16) {
+        sprintf(str, "%x", value);
+    } else if (base == 8) {
+        sprintf(str, "%o", value);
+    }
+}
+
+static void ltoa_compat(long value, char* str, int base) {
+    if (base == 10) {
+        sprintf(str, "%ld", value);
+    } else if (base == 16) {
+        sprintf(str, "%lx", value);
+    } else if (base == 8) {
+        sprintf(str, "%lo", value);
+    }
+}
+
+static void ultoa_compat(unsigned long value, char* str, int base) {
+    if (base == 10) {
+        sprintf(str, "%lu", value);
+    } else if (base == 16) {
+        sprintf(str, "%lx", value);
+    } else if (base == 8) {
+        sprintf(str, "%lo", value);
+    }
+}
 
 /*********************************************/
 /*  Static Member Initialisation             */
@@ -86,7 +119,7 @@ String::String(unsigned char value, unsigned char base)
 {
 	init();
 	char buf[1 + 8 * sizeof(unsigned char)];
-	_itoa(value, buf, base);
+	itoa_compat(value, buf, base);
 	*this = buf;
 }
 
@@ -94,7 +127,7 @@ String::String(int value, unsigned char base)
 {
 	init();
 	char buf[2 + 8 * sizeof(int)];
-	_itoa(value, buf, base);
+	itoa_compat(value, buf, base);
 	*this = buf;
 }
 
@@ -102,7 +135,7 @@ String::String(unsigned int value, unsigned char base)
 {
 	init();
 	char buf[1 + 8 * sizeof(unsigned int)];
-	_itoa(value, buf, base);
+	itoa_compat(value, buf, base);
 	*this = buf;
 }
 
@@ -110,7 +143,7 @@ String::String(long value, unsigned char base)
 {
 	init();
 	char buf[2 + 8 * sizeof(long)];
-	_ltoa(value, buf, base);
+	ltoa_compat(value, buf, base);
 	*this = buf;
 }
 
@@ -118,7 +151,7 @@ String::String(unsigned long value, unsigned char base)
 {
 	init();
 	char buf[1 + 8 * sizeof(unsigned long)];
-	_ultoa(value, buf, base);
+	ultoa_compat(value, buf, base);
 	*this = buf;
 }
 
@@ -298,35 +331,35 @@ bool String::concat(char c)
 bool String::concat(unsigned char num)
 {
 	char buf[1 + 3 * sizeof(unsigned char)];
-	_itoa(num, buf, 10);
+	itoa_compat(num, buf, 10);
 	return concat(buf);
 }
 
 bool String::concat(int num)
 {
 	char buf[2 + 3 * sizeof(int)];
-	_itoa(num, buf, 10);
+	itoa_compat(num, buf, 10);
 	return concat(buf);
 }
 
 bool String::concat(unsigned int num)
 {
 	char buf[1 + 3 * sizeof(unsigned int)];
-	_itoa(num, buf, 10);
+	itoa_compat(num, buf, 10);
 	return concat(buf);
 }
 
 bool String::concat(long num)
 {
 	char buf[2 + 3 * sizeof(long)];
-	_ltoa(num, buf, 10);
+	ltoa_compat(num, buf, 10);
 	return concat(buf);
 }
 
 bool String::concat(unsigned long num)
 {
 	char buf[1 + 3 * sizeof(unsigned long)];
-	_ultoa(num, buf, 10);
+	ultoa_compat(num, buf, 10);
 	return concat(buf);
 }
 

@@ -1,4 +1,5 @@
 #include "Watchy_7_SEG.h"
+#include <iostream>
 
 #define DARKMODE true
 
@@ -9,16 +10,70 @@ const uint8_t WEATHER_ICON_WIDTH = 48;
 const uint8_t WEATHER_ICON_HEIGHT = 32;
 
 void Watchy7SEG::drawWatchFace(){
+    std::cout << "Watchy7SEG::drawWatchFace called, displayMode=" << displayMode << std::endl;
     display.fillScreen(DARKMODE ? GxEPD_BLACK : GxEPD_WHITE);
     display.setTextColor(DARKMODE ? GxEPD_WHITE : GxEPD_BLACK);
-    drawTime();
-    drawDate();
-    drawSteps();
-    drawWeather();
-    drawBattery();
-    display.drawBitmap(120, 77, WIFI_CONFIGURED ? wifi : wifioff, 26, 18, DARKMODE ? GxEPD_WHITE : GxEPD_BLACK);
-    if(BLE_CONFIGURED){
-        display.drawBitmap(100, 75, bluetooth, 13, 21, DARKMODE ? GxEPD_WHITE : GxEPD_BLACK);
+    
+    if (displayMode == 0) {
+        // Normal mode
+        drawTime();
+        drawDate();
+        drawSteps();
+        drawWeather();
+        drawBattery();
+        display.drawBitmap(120, 77, WIFI_CONFIGURED ? wifi : wifioff, 26, 18, DARKMODE ? GxEPD_WHITE : GxEPD_BLACK);
+        if(BLE_CONFIGURED){
+            display.drawBitmap(100, 75, bluetooth, 13, 21, DARKMODE ? GxEPD_WHITE : GxEPD_BLACK);
+        }
+    } else if (displayMode == 1) {
+        // Show seconds mode
+        display.setFont(&DSEG7_Classic_Bold_53);
+        display.setCursor(5, 80);
+        uint8_t displayHour = (HOUR_12_24 == 12) ? ((currentTime.Hour + 11) % 12) + 1 : currentTime.Hour;
+        if (displayHour < 10) display.print("0");
+        display.print(displayHour);
+        display.print(":");
+        if (currentTime.Minute < 10) display.print("0");
+        display.print(currentTime.Minute);
+        display.setFont(&DSEG7_Classic_Bold_25);
+        display.setCursor(5, 120);
+        display.print(":");
+        if (currentTime.Second < 10) display.print("0");
+        display.print(currentTime.Second);
+    } else if (displayMode == 2) {
+        // Show date large mode
+        display.setFont(&DSEG7_Classic_Bold_25);
+        display.setCursor(20, 60);
+        display.print(dayShortStr(currentTime.Wday));
+        display.setCursor(20, 100);
+        display.print(monthShortStr(currentTime.Month));
+        display.print(" ");
+        display.print(currentTime.Day);
+        display.setCursor(20, 140);
+        display.print("20");
+        display.print(currentTime.Year);
+    }
+}
+
+void Watchy7SEG::handleButtonPress(uint8_t buttonID) {
+    std::cout << "Watchy7SEG::handleButtonPress called with button " << (int)buttonID << std::endl;
+    std::cout << "Current displayMode: " << displayMode << std::endl;
+    
+    switch(buttonID) {
+        case 1: // Menu/Back button - cycle display modes
+            displayMode = (displayMode + 1) % 3;
+            std::cout << "Changed displayMode to: " << displayMode << std::endl;
+            break;
+        case 2: // Up button
+            std::cout << "Up button pressed (no action defined)" << std::endl;
+            break;
+        case 3: // Down button
+            std::cout << "Down button pressed (no action defined)" << std::endl;
+            break;
+        case 4: // Select button - reset to normal mode
+            displayMode = 0;
+            std::cout << "Reset displayMode to: " << displayMode << std::endl;
+            break;
     }
 }
 

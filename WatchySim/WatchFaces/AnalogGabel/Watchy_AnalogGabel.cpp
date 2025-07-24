@@ -1,4 +1,5 @@
 #include "Watchy_AnalogGabel.h"
+#include <cmath>
 
 void WatchyAnalogGabel::drawWatchFace() { //override this method to customize how the watch face looks
     //background
@@ -21,10 +22,7 @@ void WatchyAnalogGabel::drawWatchFace() { //override this method to customize ho
         dateDay += "0";
     }
 
-    char buffer[3];
-    _itoa_s<3>(currentTime.Day, buffer, 10);
-
-    dateDay += buffer;
+    dateDay += std::to_string(currentTime.Day).c_str();
     display.fillRect(128, 88, 27, 24, GxEPD_WHITE);
     display.setFont(&FreeSerifBold12pt7b);
     display.setTextColor(GxEPD_BLACK);

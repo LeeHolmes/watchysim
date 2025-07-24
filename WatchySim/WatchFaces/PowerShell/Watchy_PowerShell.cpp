@@ -1,6 +1,6 @@
 #include <ctime>
 
-#include "Watchy_Powershell.h"
+#include "Watchy_PowerShell.h"
 
 WatchyPowerShell::WatchyPowerShell() {};
 

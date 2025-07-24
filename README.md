@@ -14,6 +14,47 @@ WatchySim gives you a Watchy-like SDK to develop your watch faces, but lets you 
 
 WatchySim builds under Visual Studio [Community Edition](https://visualstudio.microsoft.com/vs/community/). This is a free version of Visual Studio that anybody can download and use.
 
+### Linux Port
+
+WatchySim now supports Linux through SDL2. The Linux port provides the same simulation capabilities with an interactive Dear ImGui menu for controlling various watch parameters.
+
+<img width="1019" height="717" alt="image" src="https://github.com/user-attachments/assets/fd6024d3-ca62-47af-85cf-1ca9a0a27084" />
+
+#### Linux Build Requirements
+
+- CMake 3.10 or higher
+- SDL2 development libraries
+- C++11 compatible compiler (GCC or Clang)
+- Git (for fetching Dear ImGui)
+
+#### Linux Build Instructions
+
+```bash
+# Install dependencies (Ubuntu/Debian)
+sudo apt-get install cmake libsdl2-dev build-essential
+
+# Clone the repository
+git clone https://github.com/LeeHolmes/watchysim.git
+cd watchysim
+
+# Build with CMake
+mkdir build
+cd build
+cmake ..
+make -j$(nproc)
+
+# Run a specific watch face
+./WatchySim_7_SEG    # or any other watch face binary
+```
+
+#### Linux Features
+
+- All watch faces supported (7_SEG, DOS, Mario, Pokemon, etc.)
+- Interactive ImGui menu (press 'M' to toggle)
+- Button simulation (keys 1-4 or Q/W/E/R)
+- Real-time parameter adjustment (battery, time, weather, etc.)
+- Cross-platform compatibility
+
 ## Testing a Watch Face
 
 WatchySim comes with most of the example Watchy watch faces by default. You can explore these examples to see how to add another. In general:

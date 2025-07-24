@@ -2,7 +2,11 @@
 #define WATCHY_7_SEG_H
 
 #ifdef WATCHY_SIM
-    #include "..\..\Watchy.h"
+    #ifdef _WIN32
+        #include "..\..\Watchy.h"
+    #else
+        #include "../../Watchy_SDL2.h"
+    #endif
 #else // WATCHY_SIM
     #include <Watchy.h>
 #endif // WATCHY_SIM
@@ -15,12 +19,15 @@
 class Watchy7SEG : public Watchy{
     using Watchy::Watchy;
     public:
-        void drawWatchFace();
+        void drawWatchFace() override;
+        void handleButtonPress(uint8_t buttonID) override;
         void drawTime();
         void drawDate();
         void drawSteps();
         void drawWeather();
         void drawBattery();
+    private:
+        int displayMode = 0; // 0: normal, 1: show seconds, 2: show date large
 };
 
 #endif

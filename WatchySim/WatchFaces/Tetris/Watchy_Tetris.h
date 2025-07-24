@@ -2,9 +2,13 @@
 #define WATCHY_TETRIS_H
 
 #ifdef WATCHY_SIM
-#include "..\..\Watchy.h"
+    #ifdef _WIN32
+        #include "..\..\Watchy.h"
+    #else
+        #include "../../Watchy_SDL2.h"
+    #endif
 #else // WATCHY_SIM
-#include <Watchy.h>
+    #include <Watchy.h>
 #endif // WATCHY_SIM
 #include "tetris.h"
 

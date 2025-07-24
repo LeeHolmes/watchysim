@@ -1,0 +1,29 @@
+# Object files
+*.o
+*.obj
+
+# Executables
+WatchySim
+*.exe
+
+# Build directories
+build/
+cmake-build-*/
+
+# IDE files
+.vscode/
+.idea/
+
+# SDL2 specific
+*.dll
+*.so
+*.dylib
+
+# Backup files
+*~
+*.bak
+
+# Core dumps
+core
+*.core
+EOF < /dev/null

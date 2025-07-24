@@ -3,4 +3,4 @@
 
 char* dtostrf(double val, signed char width, unsigned char prec, char* sout);
 
-#endif DTOSTRF_H
+#endif // DTOSTRF_H
